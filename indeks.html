@@ -1,0 +1,1216 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kertas Kerja Manajemen Risiko 2026 — Dinas PMD Provinsi Sulawesi Tengah</title>
+<style>
+:root{
+  --navy:#122540;
+  --navy-2:#1c3a5e;
+  --paper:#f6f3ec;
+  --paper-2:#ffffff;
+  --ink:#1b1b1b;
+  --muted:#6b6f76;
+  --line:#dcd6c7;
+  --gold:#b6842c;
+  --gold-2:#e4b356;
+  --green:#3f7a4f;
+  --amber:#c98a1f;
+  --red:#b5442e;
+  --shadow:0 1px 2px rgba(18,37,64,.06), 0 8px 24px -14px rgba(18,37,64,.25);
+  --radius:10px;
+  font-family:'Source Sans Pro',Arial,sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);}
+body{
+  font-family:'Georgia',"Source Sans Pro",Arial,sans-serif;
+  font-size:15px;
+  line-height:1.5;
+}
+.app{display:flex;min-height:100vh;}
+
+/* Sidebar */
+.sidebar{
+  width:270px;flex-shrink:0;background:var(--navy);color:#e9ecf1;
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+.brand{padding:22px 20px 14px;border-bottom:1px solid rgba(255,255,255,.12);}
+.brand .eyebrow{font-family:'Source Sans Pro',Arial,sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-2);font-weight:600;}
+.brand h1{font-family:Georgia,serif;font-size:19px;margin:6px 0 4px;line-height:1.25;font-weight:700;}
+.brand .sub{font-size:12.5px;color:#b9c2d1;}
+nav.menu{padding:10px 10px 20px;flex:1;}
+.menu-group{margin-top:14px;}
+.menu-group-title{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:#8a93a6;padding:6px 10px;font-weight:700;font-family:'Source Sans Pro',Arial,sans-serif;}
+.menu-item{
+  display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:none;border:none;color:#d7dce6;
+  padding:9px 10px;border-radius:7px;cursor:pointer;font-size:13.5px;font-family:'Source Sans Pro',Arial,sans-serif;
+}
+.menu-item:hover{background:rgba(255,255,255,.06);}
+.menu-item.active{background:var(--gold);color:#1a1200;font-weight:700;}
+.menu-item .code{
+  font-family:Georgia,serif;font-weight:700;font-size:11px;flex-shrink:0;width:26px;height:20px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.1);border-radius:4px;
+}
+.menu-item.active .code{background:rgba(0,0,0,.18);}
+.sidebar-foot{padding:14px 20px;border-top:1px solid rgba(255,255,255,.12);font-size:11.5px;color:#8a93a6;}
+
+/* Main */
+main{flex:1;min-width:0;}
+.topbar{
+  position:sticky;top:0;z-index:5;background:var(--paper-2);border-bottom:1px solid var(--line);
+  padding:14px 34px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.topbar .crumbs{font-size:12px;color:var(--muted);letter-spacing:.02em;text-transform:uppercase;font-family:'Source Sans Pro',Arial,sans-serif;}
+.topbar h2{font-family:Georgia,serif;margin:2px 0 0;font-size:22px;}
+.topbar-actions{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.btn{
+  font-family:'Source Sans Pro',Arial,sans-serif;font-size:13px;font-weight:600;border-radius:7px;border:1px solid var(--line);
+  background:#fff;color:var(--navy-2);padding:9px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+}
+.btn:hover{border-color:var(--navy-2);}
+.btn-primary{background:var(--navy);border-color:var(--navy);color:#fff;}
+.btn-primary:hover{background:var(--navy-2);}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:#1a1200;}
+.btn-gold:hover{background:var(--gold-2);}
+.btn-danger{color:var(--red);border-color:#e6c9c1;}
+.btn-danger:hover{background:#fbf0ee;}
+.btn-sm{padding:6px 10px;font-size:12px;}
+.save-pill{font-size:11.5px;color:var(--green);font-family:'Source Sans Pro',Arial,sans-serif;display:flex;align-items:center;gap:5px;opacity:0;transition:opacity .3s;}
+.save-pill.show{opacity:1;}
+
+.content{padding:26px 34px 80px;max-width:1180px;}
+.panel{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin-bottom:20px;}
+.panel h3{font-family:Georgia,serif;font-size:17px;margin:0 0 4px;}
+.panel .desc{font-size:13px;color:var(--muted);margin-bottom:16px;font-family:'Source Sans Pro',Arial,sans-serif;}
+
+/* Header info grid */
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 22px;}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field.full{grid-column:1/-1;}
+.field label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--navy-2);font-family:'Source Sans Pro',Arial,sans-serif;}
+.field .help{font-size:11.5px;color:var(--muted);font-family:'Source Sans Pro',Arial,sans-serif;margin-top:-2px;}
+input[type=text],input[type=number],textarea,select{
+  font-family:'Source Sans Pro',Arial,sans-serif;font-size:13.5px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;
+  background:#fdfcf9;color:var(--ink);width:100%;
+}
+textarea{resize:vertical;min-height:38px;line-height:1.4;}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--gold-2);outline-offset:0;border-color:var(--gold);}
+
+/* Record cards */
+.record-list{display:flex;flex-direction:column;gap:14px;}
+.group-heading{
+  font-family:Georgia,serif;font-size:14px;font-weight:700;color:var(--navy-2);margin:18px 0 4px;
+  padding-bottom:6px;border-bottom:2px solid var(--gold-2);
+}
+.group-heading:first-child{margin-top:0;}
+.record-card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fffdf9;}
+.record-card summary{
+  list-style:none;cursor:pointer;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;
+  font-family:'Source Sans Pro',Arial,sans-serif;
+}
+.record-card summary::-webkit-details-marker{display:none;}
+.record-card summary .idx{
+  flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:11.5px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin-top:1px;
+}
+.record-card summary .sum{flex:1;min-width:0;}
+.record-card summary .sum .title{font-size:13.5px;font-weight:600;color:var(--ink);}
+.record-card summary .sum .meta{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.record-card summary .chev{color:var(--muted);font-size:12px;margin-top:4px;transition:transform .15s;}
+.record-card[open] summary .chev{transform:rotate(90deg);}
+.record-card .body{padding:4px 16px 16px;border-top:1px dashed var(--line);}
+.record-fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 18px;margin-top:12px;}
+.record-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);}
+.add-row{display:flex;justify-content:center;margin-top:8px;}
+
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:'Source Sans Pro',Arial,sans-serif;}
+.badge-rendah{background:#e4f1e6;color:var(--green);}
+.badge-sedang{background:#fdf0d8;color:var(--amber);}
+.badge-tinggi{background:#fbe3dd;color:var(--red);}
+
+/* Matrix view */
+.matrix-wrap{overflow-x:auto;}
+table.matrix{border-collapse:collapse;width:100%;font-family:'Source Sans Pro',Arial,sans-serif;font-size:12.5px;}
+table.matrix th,table.matrix td{border:1px solid var(--line);padding:8px;vertical-align:top;}
+table.matrix th{background:var(--navy);color:#fff;font-weight:600;text-align:center;}
+table.matrix td.axis{background:#eef1f6;font-weight:700;text-align:center;color:var(--navy-2);}
+table.matrix td.cell{min-height:60px;}
+.chip{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:5px;padding:2px 6px;margin:2px 3px 0 0;font-size:11px;}
+.cell.lvl-rendah{background:#eef8ef;}
+.cell.lvl-sedang{background:#fdf6e6;}
+.cell.lvl-tinggi{background:#fbeae5;}
+.cell.lvl-sangattinggi{background:#f7d9d0;}
+
+.fgd-table-wrap{overflow-x:auto;}
+table.fgd{border-collapse:collapse;font-size:11.5px;font-family:'Source Sans Pro',Arial,sans-serif;}
+table.fgd th,table.fgd td{border:1px solid var(--line);padding:5px 6px;text-align:center;white-space:nowrap;}
+table.fgd th{background:var(--navy);color:#fff;font-weight:600;}
+table.fgd td.name-col{text-align:left;white-space:normal;min-width:170px;}
+table.fgd input{width:42px;padding:4px;text-align:center;}
+table.fgd tr.avg td{font-weight:700;background:#f2eee1;}
+
+.kriteria-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+table.kriteria{width:100%;border-collapse:collapse;font-size:12.5px;font-family:'Source Sans Pro',Arial,sans-serif;}
+table.kriteria th,table.kriteria td{border:1px solid var(--line);padding:6px 8px;text-align:left;}
+table.kriteria th{background:#eef1f6;}
+
+.empty-state{text-align:center;padding:30px 10px;color:var(--muted);font-family:'Source Sans Pro',Arial,sans-serif;font-size:13px;}
+
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;border-radius:var(--radius);
+  padding:30px 32px;margin-bottom:22px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:rgba(230,182,86,.12);}
+.hero .eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);font-weight:700;font-family:'Source Sans Pro',Arial,sans-serif;}
+.hero h2{font-family:Georgia,serif;font-size:26px;margin:8px 0 8px;max-width:640px;}
+.hero p{font-size:13.5px;color:#cfd6e3;max-width:560px;font-family:'Source Sans Pro',Arial,sans-serif;}
+.stat-row{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+.stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:12px 16px;min-width:120px;}
+.stat .n{font-family:Georgia,serif;font-size:22px;font-weight:700;}
+.stat .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#c3cbdb;font-family:'Source Sans Pro',Arial,sans-serif;margin-top:2px;}
+
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
+.nav-card{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:16px 16px;cursor:pointer;text-align:left;box-shadow:var(--shadow);
+}
+.nav-card:hover{border-color:var(--gold);}
+.nav-card .code{font-family:Georgia,serif;font-weight:700;color:var(--gold);font-size:13px;}
+.nav-card .t{font-size:13.5px;font-weight:700;margin:4px 0 2px;font-family:'Source Sans Pro',Arial,sans-serif;}
+.nav-card .d{font-size:12px;color:var(--muted);font-family:'Source Sans Pro',Arial,sans-serif;}
+.nav-card .n{font-size:11px;color:var(--gold);font-weight:700;margin-top:8px;font-family:'Source Sans Pro',Arial,sans-serif;}
+
+@media(max-width:880px){
+  .app{flex-direction:column;}
+  .sidebar{width:100%;height:auto;position:relative;}
+  .info-grid,.record-fields{grid-template-columns:1fr;}
+  .content{padding:18px;}
+  .topbar{padding:12px 18px;flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="eyebrow">Manajemen Risiko 2026</div>
+      <h1>Kertas Kerja Manajemen Risiko</h1>
+      <div class="sub">Dinas PMD Provinsi Sulawesi Tengah</div>
+    </div>
+    <nav class="menu" id="menu"></nav>
+    <div class="sidebar-foot">Data tersimpan otomatis di perangkat ini · Ekspor kapan saja ke Excel</div>
+  </aside>
+  <main>
+    <div class="topbar">
+      <div>
+        <div class="crumbs" id="crumb">Beranda</div>
+        <h2 id="pageTitle">Beranda</h2>
+      </div>
+      <div class="topbar-actions">
+        <span class="save-pill" id="savePill">✓ Tersimpan</span>
+        <button class="btn" id="btnReset">Muat Ulang Data Awal</button>
+        <label class="btn" for="fileImport">Impor Excel
+          <input type="file" id="fileImport" accept=".xlsx" style="display:none">
+        </label>
+        <button class="btn btn-gold" id="btnExport">⬇ Ekspor ke Excel</button>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </main>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const RAW_DATA = {"form2b":{"namaPemda":"Provinsi Sulawesi Tengah","tahun":"2026","periode":"Periode RPJMD 2025-2029","urusan":"Urusan Wajib bukan Pelayanan Dasar","opd":"Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah","sumberData":"Rancangan Akhir Renstra Dinas Pemberdayaan Masyarakat dan Desa ","tujuanStrategis":"Meningkatnya Pemberdayaan Masyarakat dan Kemandirian Desa","sasaranStrategis":["1. Meningkatkan Kemandirian Desa ( Indeks Desa)"],"iku":[{"no":"1.","uraian":"Indeks Desa","target":72.47,"satuan":"%"},{"no":"2.","uraian":"Presentase Desa Mandiri","target":23.78,"satuan":"%"},{"no":"3.","uraian":"Presentase Desa Sangat Tertinggal dan Desa Tertinggal yang meningkat status desanya","target":30.77,"satuan":"%"}],"tujuanDinilai":"Penilaian risiko strategis Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah dilakukan atas tujuan strategis Meningkatkan Penataan Administrasi Pemerintahan, Kerjasama Desa dan Pemberdayaan Lembaga Kemasyarakatan Desa dan Lembaga Adat Desa.","sasaranDinilai":["Meningkatkan Kemandirian Desa ( Indeks Desa)"],"ikuDinilai":[{"no":"1.","uraian":"Indeks Desa","target":72.47,"satuan":"%"},{"no":"2.","uraian":"Presentase Desa Mandiri","target":23.78,"satuan":"%"},{"no":"3.","uraian":"Presentase Desa Sangat Tertinggal dan Desa Tertinggal yang meningkat status desanya","target":30.77,"satuan":"%"}],"ttdTempatTanggal":"Palu,       Desember 2026\nKepala Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulteng\n\n\n\n","ttdNama":"IHSAN BASIR, S.H.,LL.M","ttdPangkat":"Pembina Utama Madya","ttdNip":"NIP. 197011091998031016"},"form2c":{"namaPemda":"Pemerintah Provinsi Sulawesi Tengah ","tahun":2026,"periode":"1 tahun","urusan":"Urusan Wajib bukan Pelayanan Dasar","opd":"Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah","sumberData":"Renja Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah Tahun 2025","tujuanStrategis":"Meningkatnya Pemberdayaan Masyarakat dan Kemandirian Desa","programKegiatan":[{"level":"program","program":"Program Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah Tahun 2025 (Renstra 2021-2026)\ndan Kegiatan Utama","kegiatan":"Program Penataan Desa","sub":""},{"level":"kegiatan","program":"","kegiatan":"Kegiatan Penatausahaan Penetapan Susunan Kelembagaan, Pengisian Jabatan, dan Masa Jabatan Kepala Desa dan Desa Adat","sub":""},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Kabupaten/Kota dan Desa dalam Rangka Penataan Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Penyediaan Prasarana dan Sarana Pelayanan Pemerintahan Desa"},{"level":"kegiatan","program":"","kegiatan":"Program Peningkatan Kerjasama Desa","sub":""},{"level":"kegiatan","program":"","kegiatan":"Kegiatan Fasilitasi Kerjasama Antar Desa yang Menjadi Kewenangan Provinsi","sub":""},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Kerjasama Antar Desa Lintas Kabupaten/Kota"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Kerjasama  Desa dengan Pihak Ketiga"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Pembangunan Kawasan Perdesaan"},{"level":"kegiatan","program":"","kegiatan":"Program Administrasi Pemerintahan Desa","sub":""},{"level":"kegiatan","program":"","kegiatan":"Kegiatan Pembinaan dan Pengawasan Penyelenggaraan Pemerintahan Desa","sub":""},{"level":"sub","program":"","kegiatan":"-","sub":"Pembinaan Manajemen Pemerintahan Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Penyusunan, Perencanaan, Pelaksanaan dan Pengawasan Pembangunan Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Evaluasi Perkembangan Desa Serta Lomba Desa dan Kelurahan"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Pelaksanaan Profil Desa dan Kelurahan"},{"level":"sub","program":"","kegiatan":"-","sub":"Pembinaan Aparatur Pemerintah Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Pembinaan Percepatan Pembangunan Desa Melalui Bantuan Keuangan, Bantuan Pendampingan dan Bantuan Teknis\\"},{"level":"sub","program":"","kegiatan":"-","sub":"Pelaksanaan Penugasan Urusan/Kewenangan Provinsi Yang Dilaksanakan Oleh Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Pembinaan dan Pengawasan Penetapan Pengaturan BUM Desa Kabupaten/Kota dan Lembaga Kerja Sama antar Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Penetapan dan Penegasan Batas Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Peran BPD Dalam Penyelenggaraan Pemerintahan Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Pekan Inovasi Perkembangan Desa"},{"level":"kegiatan","program":"","kegiatan":"Program Pemberdayaan Lembaga Kemasyarakatan, Lembaga Adat dan Masyarakat Hukum Adat","sub":""},{"level":"kegiatan","program":"","kegiatan":"Kegiatan Pemberdayaan Lembaga Kemasyarakatan yang Bergerak di Bidang Pemberdayaan Desa dan Lembaga Adat Tingkat Daerah Provinsi Serta Pemberdayaan Masyarakat Hukum Adat yang Masyarakat Pelakunya Hukum Adat yang Sama Berada di Lintas Daerah Kabupaten/Kota","sub":""},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Penataan, Pemberdayaan dan Pendayagunaan Kelembagaan Lembaga Kemasyarakatan Desa/Kelurahan (RT, RW, PKK,  LPM dan Karang Taruna) Lembaga Adat Desa/Kelurahan dan Masyarakat Hukum Adat"},{"level":"sub","program":"","kegiatan":"-","sub":"Peningkatan Kapasitas  Kelembagaan Lembaga Kemasyarakatan Desa/Kelurahan (RT, RW, PKK, Posyandu, LPM dan Karang Taruna) Lembaga Adat Desa/Kelurahan dan Masyarakat Hukum Adat"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Penyediaan Sarana dan Prasarana  Kelembagaan Lembaga Kemasyarakatan Desa/Kelurahan (RT, RW, PKK, Posyandu, LPM dan Karang Taruna) Lembaga Adat Desa/Kelurahan dan Masyarakat Hukum Adat"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Pengembangan Usaha Ekonomi Masyarakat dan Pemerintah Desa dalam Meningkatkan Pendapatan Asli Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Pemerintah Desa dalam Pemanfaatan Teknologi Tepat Guna"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Bulan Bhakti Gotong Royong Masyarakat"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Penyelenggaraan Ketentraman Ketertiban danperlindungan Masyarakat Desa"},{"level":"sub","program":"","kegiatan":"-","sub":"Fasilitasi Tim Penggerak PKK dalam Penyelenggaraan Gerakan Pemberdayaan Masyarakat dan Kesejahteraan Keluarga"}],"kegiatanIndikator":[{"kegiatan":"KEGIATAN","indikator":"INDIKATOR","target":"TARGET"},{"kegiatan":"Program Penataan Desa","indikator":"Nilai Dimensi Tata Kelola Pemerintahan Desa","target":"9,76 %"},{"kegiatan":"Kegiatan Penatausahaan Penetapan Susunan Kelembagaan, Pengisian Jabatan, dan Masa Jabatan Kepala Desa dan Desa Adat","indikator":"Jumlah Laporan Penetapan Susunan Kelembagaan, Pengisian Jabatan, dan Masa Jabatan Kepala Desa dan Desa Adat","target":"6 Laporan"},{"kegiatan":"-","indikator":"Jumlah     Prasarana     dan     Sarana    Pelayanan Pemerintahan Desa","target":"1 Unit"},{"kegiatan":"Program Administrasi Pemerintahan Desa","indikator":"Presentase Peningkatan kerjasama desa dan kawasan perdesaan","target":""},{"kegiatan":"Kegiatan Pembinaan dan Pengawasan Penyelenggaraan Pemerintahan Desa","indikator":"","target":"1 Laporan"},{"kegiatan":"-","indikator":"Jumlah Dokumen Hasil Evaluasi Perkembangan Desa serta Lomba Desa dan Kelurahan","target":"5 Dokumen"},{"kegiatan":"-","indikator":"Jumlah Dokumen Hasil Fasilitasi Pelaksanaan Profil Desa dan Kelurahan","target":"5 Dokumen"},{"kegiatan":"-","indikator":"Jumlah Aparatur Pemerintahan Desa yang dibina","target":"56 org"},{"kegiatan":"-","indikator":"Jumlah Dokumen Usulan Kabupaten yang mengikuti bintek dalam penetapan dan penegasan batas desa","target":"2 Dokumen"},{"kegiatan":"Program Pemberdayaan Lembaga Kemasyarakatan, Lembaga Adat dan Masyarakat Hukum Adat","indikator":"","target":""},{"kegiatan":"Kegiatan Pemberdayaan Lembaga Kemasyarakatan yang Bergerak di Bidang Pemberdayaan Desa dan Lembaga Adat Tingkat Daerah Provinsi Serta Pemberdayaan Masyarakat Hukum Adat yang Masyarakat Pelakunya Hukum Adat yang Sama Berada di Lintas Daerah Kabupaten/Kota","indikator":"","target":"1 Laporan"},{"kegiatan":"-","indikator":"Jumlah Sarana dan Prasarana Kelembagaan Lembaga Kemasyarakatan Desa/Kelurahan (RT, RW, PKK, Posyandu, LPM, dan  Karang Taruna), Lembaga Adat Desa/Kelurahan dan Masyarakat Hukum Adat","target":"2 Unit"},{"kegiatan":"-","indikator":"Jumlah Dokumen Hasil Fasilitasi Pengembangan Usaha Ekonomi Masyarakat dan Pemerintah Desa dalam Meningkatkan Pendapatan Asli Desa","target":"4 Dokumen"}],"ttdTempatTanggal":"Palu,     Desember 2026","ttdJabatan":"Kepala Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulteng","ttdNama":"IHSAN BASIR, S.H.,LL.M","ttdPangkat":"Pembina Utama Madya","ttdNip":"NIP. 197011091998031016"},"form3b":{"namaPemda":"Provinsi Sulawesi Tengah","namaOpd":"Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah","tahun":"2026","periode":"1 tahun","tujuanStrategis":"Meningkatnya Pemberdayaan Masyarakat dan Kemandirian Desa","urusan":"Urusan Wajib bukan Pelayanan Dasar","opd":"Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah","records":[{"no":"1.","tujuanSasaran":"Meningkatnya Kemandirian Desa ( Indeks Desa)","indikator":"Presentase Desa Mandiri","risiko":"Penyesuaian IDM Menjadi Indeks desa mengakibatkan Status Desa menurun","kode":"RSO.26.13.16.01","pemilik":"Dinas PMD","sebab":"Pemerintah Desa belum memahami perubahan indikator IDM menjadi Indeks desa dalam pengukuran kemajuan desa","sumber":"eksternal","cuc":"C/UC","dampak":"Status Desa menurun","pihakTerkena":"Kemendes PDT dan Transmigrasi, PMD Provinsi, PMD Kabupaten dan Pemerintah Desa"},{"no":2,"tujuanSasaran":"","indikator":"Presentase Desa Mandiri","risiko":"Desa berkembang cenderung tidak berupaya naik status karena alokasi dana desa akan berkurang","kode":"RSO.26.13.16.02","pemilik":"Dinas PMD","sebab":"Pemerintah Desa belum menggunakan rekomendasi indeks desa untuk perencanaan dan pembangunan dalam peningkatan status desa ","sumber":"eksternal","cuc":"C","dampak":"Peningkatan status desa mandiri belum signifikan ","pihakTerkena":"Kemendes PDT dan Transmigrasi, PMD Provinsi, PMD Kabupaten dan Pemerintah Desa"},{"no":3,"tujuanSasaran":"","indikator":"Presentase Desa Samgat  Tertinggal dan Desa Tertinggal yang meningkat status desanya","risiko":"Desa tertinggal tidak berupaya naik status karena akan kehilangan dana afirmasi dan tunjangan Dacil","kode":"RSO.26.13.16.03","pemilik":"Dinas PMD","sebab":"Pemerintah Desa belum memahami tujuan pemberian dana desa untuk peningkatan status desa","sumber":"eksternal","cuc":"C","dampak":"Peningkatan status perkembangan desa rendah","pihakTerkena":"Kemendes PDT dan Transmigrasi, PMD Provinsi, PMD Kabupaten dan Pemerintah Desa"}]},"form3c":{"namaPemda":"Provinsi Sulawesi Tengah","namaOpd":"Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah","tahun":"2026","periode":"1 tahun","tujuanStrategis":"Meningkatnya Pemberdayaan Masyarakat dan Pemberdayaan Desa","sasaranStrategis":"Meningkatkan Kemandirian Desa","indikatorSasaran":["1. Indeks Desa","2. Persentase Desa Mandiri","3. Persentase Desa Sangat Tertinggal dan Desa Tertinggal yang meningkat Status Desanya"],"urusan":"Urusan Wajib bukan Pelayanan Dasar","opd":"Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah","records":[{"program":"Penataan Desa","no":1,"subKegiatan":"Penyediaan   Prasarana     dan     Sarana    Pelayanan\nPemerintahan Desa","indikator":"Jumlah     Prasarana     dan     Sarana    Pelayanan Pemerintahan Desa","tahap":"Perencanaan","risiko":"Paket pekerjaan yang beragam dari Bappeda","kode":"ROO 26.13.16.01","pemilik":"Pemprov Sulteng","sebab":"Paket belum di seleksi oleh kamus pokir","sumber":"eksternal","cuc":"C","dampak":"Paket pekerjaan lebih sesuai dengan kebutuhan di lapangan","pihakTerkena":"DPMD Provinsi dan Pemerintah Desa"},{"program":"Penataan Desa","no":1,"subKegiatan":"Penyediaan   Prasarana     dan     Sarana    Pelayanan\nPemerintahan Desa","indikator":"Jumlah     Prasarana     dan     Sarana    Pelayanan Pemerintahan Desa","tahap":"Penganggaran","risiko":"Tidak tersedianya SSH dari pihak ketiga","kode":"ROO 26.13.16.02","pemilik":"Pemprov Sulteng","sebab":"Pihak ketiga tidak melakukan survei harga barang","sumber":"eksternal","cuc":"C","dampak":"OPD yang turun melakukan survei harga barang","pihakTerkena":"DPMD Provinsi dan Pemerintah Desa"},{"program":"Penataan Desa","no":1,"subKegiatan":"Penyediaan   Prasarana     dan     Sarana    Pelayanan\nPemerintahan Desa","indikator":"Jumlah     Prasarana     dan     Sarana    Pelayanan Pemerintahan Desa","tahap":"Pelaksanaan","risiko":"Pengantaran barang terlambat","kode":"ROO 26.13.16.03","pemilik":"Pemprov Sulteng","sebab":"Rincian barang di proposal tidak ada di aplikasi SIPD","sumber":"eksternal","cuc":"C","dampak":"Realisasi belanja hibah terhambat","pihakTerkena":"DPMD Provinsi dan Pemerintah Desa"},{"program":"Penataan Desa","no":1,"subKegiatan":"Penyediaan   Prasarana     dan     Sarana    Pelayanan\nPemerintahan Desa","indikator":"Jumlah     Prasarana     dan     Sarana    Pelayanan Pemerintahan Desa","tahap":"Pelaporan","risiko":"penyusunan laporan terlambat","kode":"ROO 26.13.16.04","pemilik":"Pemprov Sulteng","sebab":"Barang yang datang kurang, tidak sesuai atau terlambat","sumber":"eksternal","cuc":"C","dampak":"Realisasi belanja hibah terhambat","pihakTerkena":"DPMD Provinsi dan Pemerintah Desa"},{"program":"Administrasi Pemerintahan Desa","no":2,"subKegiatan":"Fasilitasi Evaluasi  Perkembangan Desa serta Lomba Desa dan Kelurahan","indikator":"Jumlah  Desa dan Kelurahan yang mengikuti EPDESKEL","tahap":"Pelaksanaan","risiko":"Fasilitasi Pelaksanaan EPDESKEL mengikuti Pekan Inovasi Desa/Kelurahan","kode":"ROO 26.13.16.05","pemilik":"Kadis DPMD/ Kabid Penataan dan Perkembangan Desa","sebab":"Desa dan Kelurahan yang berpartisipasi mengikuti Pekan Inovasi Desa/Kelurahan rendah","sumber":"ekternal","cuc":"C/UC","dampak":"Akses informasi tentang inovasi Desa dan Kelurahan terkait dngan partisipasi penilaian EPDESKEL/ID terkait dukungan sumber daya","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Administrasi Pemerintahan Desa","no":3,"subKegiatan":"Pembinaan Aparatur Pemerintah Desa","indikator":"Jumlah Aparatur Pemerintahan Desa yang dibina","tahap":"Perencanaan","risiko":"Rapat tim untuk kegiatan Pembinaan Aparatur Pemerintah Desa","kode":"ROO 26.13.16.06","pemilik":"Kadis DPMD/ Kabid Pemerintahan Desa","sebab":"Belum adanya standarisasi peserta","sumber":"eksternal","cuc":"C","dampak":"Sudah terverifikasi calon pembinaan Aparatur Pemerintah Desa","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Administrasi Pemerintahan Desa","no":3,"subKegiatan":"Pembinaan Aparatur Pemerintah Desa","indikator":"Jumlah Aparatur Pemerintahan Desa yang dibina","tahap":"Penganggaran","risiko":"Penyesuaian anggaran di Kabupaten pelaksana kegiatan","kode":"ROO 26.13.16.07","pemilik":"Kadis DPMD/ Kabid Pemerintahan Desa","sebab":"Tidak sesuainya penganggaran di lapangan dengan anggaran yang ada","sumber":"eksternal","cuc":"C","dampak":"Standarisasi pelaksanaan di kabupaten menyesuaikan dengan provinsi","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Administrasi Pemerintahan Desa","no":3,"subKegiatan":"Pembinaan Aparatur Pemerintah Desa","indikator":"Jumlah Aparatur Pemerintahan Desa yang dibina","tahap":"Pelaksanaan","risiko":"Aparatur Desa tidak menerapkan hasil bimtek dalam penyelenggaraan Pemerintah Desanya","kode":"ROO 26.13.16.08","pemilik":"Kadis DPMD/ Kabid Pemerintahan Desa","sebab":"Aparatur Pemerintah Desa tidak berkomitmen untuk meningkatkan penyelenggaraaan Pemerintahan Desa yang lebih baik","sumber":"eksternal","cuc":"C","dampak":"Pelayanan publik tidak  maksimal","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Administrasi Pemerintahan Desa","no":3,"subKegiatan":"Pembinaan Aparatur Pemerintah Desa","indikator":"Jumlah Aparatur Pemerintahan Desa yang dibina","tahap":"Pelaporan","risiko":"Penyusunan laporan terlambat","kode":"ROO 26.13.16.09","pemilik":"Kadis DPMD/ Kabid Pemerintahan Desa","sebab":"Kelengkapan data belum sesuai","sumber":"eksternal","cuc":"C","dampak":"Realisasi terhambat","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Administrasi Pemerintahan Desa","no":4,"subKegiatan":"Fasilitasi Pelaksanaan Profil Desa Dan Kelurahan","indikator":"Jumlah  Hasil Pengimputan serta Up Date Data Profile Desa dan Kelurahan","tahap":"Pelaksanaan","risiko":"Fasilitasi Pelaksanaan Profile Desa Dan Kelurahan bagi Pemerintah Desa /Kelurahan yang belum melakukan Pengimputan serta Up Date Data secara berkelanjutan ","kode":"ROO 26.13.16.10","pemilik":"Kadis DPMD/ Kabid Penataan dan Perkembangan Desa","sebab":"Desa Dan Kelurahan yang melakukan Pengimputan dan Up Date Data Pro DesKel Maih Rendah","sumber":"eksternal","cuc":"C","dampak":"Ketidak sesuaian data ProDesKel/tidak validnya Data sesuai kebutuhan perencanaan","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Administrasi Pemerintahan Desa","no":5,"subKegiatan":"Fasilitasi Penetapan dan  Penegasan Batas Desa","indikator":"Jumlah Dokumen Hasil Penetapan dan Penegasan Batas Desa","tahap":"Pelaksanaan","risiko":"Fasilitasi penetapan dan penegasan tapal batas bagi Pemerintah Desa yang sudah dilakukan tidak berkelanjutan","kode":"ROO 26.13.16.11","pemilik":"Kadis PMD/Kabid. Penataan dan Perkembangan Desa","sebab":"Biaya pendampingan Program ILLASPP di Kab. Toli-Toli dan Kab. Donggala","sumber":"eksternal","cuc":"C/UC","dampak":"Proses penetapan PERBUB  penegasan batas desa di 2 Kabupaten","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Pemberdayaan Lembaga Kemasyarakatan, Lembaga Adat dan Masyarakat Hukum Adat","no":6,"subKegiatan":"Fasilitasi Sarana dan Prasarana Kelembagaan Lembaga Kemasyarakatan Desa/Kelurahan (RT, RW, PKK, Posyandu, LPM, dan  Karang Taruna), Lembaga Adat Desa/Kelurahan dan Masyarakat Hukum Adat","indikator":"Jumlah Sarana dan Prasarana Kelembagaan Lembaga Kemasyarakatan Desa/Kelurahan (RT, RW, PKK, Posyandu, LPM, dan  Karang Taruna), Lembaga Adat Desa/Kelurahan dan Masyarakat Hukum Adat","tahap":"Pelaksanaan","risiko":"Pemanfataan bantuan sarana prasarana oleh LKD dan masyarakat tidak optimal","kode":"ROO 26.13.16.12","pemilik":"Kadis PMD/Kabid. Pemberdayaan Lembaga Kemasyarakatan Desa","sebab":"Perlunya pemahaman staf DPRD Provinsi Sulawesi Tengah dalam melakukan penginputan pokir","sumber":"eksternal","cuc":"C","dampak":"Bantuan sarana dan prasarana  tidak dimanfaatkan maksimal oleh LKD kepada masyarakat","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, LKD Pemerintah Desa dan Masyarakat"},{"program":"Pemberdayaan Lembaga Kemasyarakatan, Lembaga Adat dan Masyarakat Hukum Adat","no":7,"subKegiatan":"Fasilitasi Pengembangan Usaha Ekonomi Masyarakat dan Pemerintah Desa dalam Meningkatkan Pendapatan Asli Desa","indikator":"Jumlah Dokumen Hasil Fasilitasi Pengembangan Usaha Ekonomi Masyarakat dan Pemerintah Desa dalam Meningkatkan Pendapatan Asli Desa","tahap":"Pelaksanaan","risiko":"Sasaran masyarakat miskin untuk pengembangan kewirausahaan dalam unit BUM Desa belum terakomodir secara optimal","kode":"ROO 26.13.16.13","pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","sebab":"Pemerintah Desa belum memahami peran BUM Desa dalam penanggulangan kemiskinan","sumber":"eksternal","cuc":"C","dampak":"Upaya menurunkan tingkat kemiskinan di desa belum terlaksana secara optimal","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Pemberdayaan Lembaga Kemasyarakatan, Lembaga Adat dan Masyarakat Hukum Adat","no":8,"subKegiatan":"","indikator":"","tahap":"Pelaksanaan","risiko":"Kompetensi narasumber dan pelatih mempengaruhi hasil penyerapan ilmu dan keterampilan tentang pengembangan BUM Desa","kode":"ROO 26.13.16.14","pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","sebab":"Pemilihan narasumber dan pelatih yang kurang selektif","sumber":"eksternal","cuc":"C","dampak":"Usaha BUM Desa tidak berkembang karena pemahaman dan keterampilan pengurus dan pengelola unit usaha Bum Desa tidak meningkat","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Pemberdayaan Lembaga Kemasyarakatan, Lembaga Adat dan Masyarakat Hukum Adat","no":9,"subKegiatan":"","indikator":"","tahap":"Pelaksanaan","risiko":"Hasil usaha gagal karena Perencanaan Bisnis yang kurang matang pada pemilihan unit usaha yang tidak didasari kemampuan teknis pengelolaan usaha dan topografi wilayah desa","kode":"ROO 26.13.16.15","pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","sebab":"Kemampuan Pengurus BUM Desa dan Unit Usaha BUM Desa dalam perencanaan BUM Desa masih rendah","sumber":"eksternal","cuc":"C","dampak":"Usaha BUM Desa tidak berkembang karena  Pengurus dan pengelola unit usaha  BUM Desa tidak memiliki kemampuan teknis pengelolaan usaha","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Pemberdayaan Lembaga Kemasyarakatan, Lembaga Adat dan Masyarakat Hukum Adat","no":9,"subKegiatan":"","indikator":"","tahap":"Perencanaan","risiko":"Jumlah target dan lokasi desa percontohan pelaksanaan kegiatan tidak sesuai dengan rencana kerja awal yang sudah ditetapkan","kode":"ROO 26.13.16.16","pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","sebab":"Penerapan efisiensi anggaran","sumber":"internal","cuc":"C","dampak":"Peningkatan peran BUM Desa dalam meningkatkan perekonomian desa di lokasi desa percontohan tidak maksimal","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"},{"program":"Pemberdayaan Lembaga Kemasyarakatan, Lembaga Adat dan Masyarakat Hukum Adat","no":9,"subKegiatan":"","indikator":"","tahap":"Penganggaran","risiko":"Rencana aksi program kegiatan yang sudah dirumuskan harus dilakukan perubahan menyesuaikan ketersediaan anggaran","kode":"ROO 26.13.16.17","pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","sebab":"Penerapan efisiensi anggaran","sumber":"internal","cuc":"C","dampak":"Peningkatan peran BUM Desa dalam meningkatkan perekonomian desa di lokasi desa percontohan tidak maksimal","pihakTerkena":"DPMD Provinsi, DPMD Kabupaten, Pemerintah Desa dan Masyarakat"}]},"form4fgd":{"judul":"Risiko Strategis dan Risiko Operasional Dinas PMD Provinsi Sulawesi Tengah","risknames":{"RSO 1":"Penyesuaian IDM Menjadi Indeks desa mengakibatkan Status Desa menurun","RSO 2":"Desa berkembang cenderung tidak berupaya naik status karena alokasi dana desa akan berkurang","RSO 3":"Desa tertinggal tidak berupaya naik status karena akan kehilangan dana afirmasi dan tunjangan Dacil","ROO 1":"Paket pekerjaan yang beragam dari Bappeda","ROO 2":"Tidak tersedianya SSH dari pihak ketiga","ROO 3":"Pengantaran barang terlambat","ROO 4":"penyusunan laporan terlambat","ROO 5":"Fasilitasi Pelaksanaan EPDESKEL mengikuti Pekan Inovasi Desa/Kelurahan","ROO 6":"Rapat tim untuk kegiatan Pembinaan Aparatur Pemerintah Desa","ROO 7":"Penyesuaian anggaran di Kabupaten pelaksana kegiatan","ROO 8":"Aparatur Desa tidak menerapkan hasil bimtek dalam penyelenggaraan Pemerintah Desanya","ROO 9":"Penyusunan laporan terlambat","ROO 10":"Fasilitasi Pelaksanaan Profile Desa Dan Kelurahan bagi Pemerintah Desa /Kelurahan yang belum melakukan Pengimputan serta Up Date Data secara berkelanjutan "},"peserta":[{"no":1,"nama":"Ilham, SKM., M.Kes","unit":"Dis PMD","scores":{"RSO 1":{"D":5,"K":4},"RSO 2":{"D":5,"K":4},"RSO 3":{"D":5,"K":4},"ROO 1":{"D":4,"K":4},"ROO 2":{"D":4,"K":4},"ROO 3":{"D":4,"K":4},"ROO 4":{"D":4,"K":4},"ROO 5":{"D":4,"K":4},"ROO 6":{"D":4,"K":4},"ROO 7":{"D":4,"K":4},"ROO 8":{"D":4,"K":4},"ROO 9":{"D":4,"K":4},"ROO 10":{"D":4,"K":""}}},{"no":2,"nama":"Ismail, SP., MP","unit":"Dis PMD","scores":{"RSO 1":{"D":4,"K":4},"RSO 2":{"D":4,"K":4},"RSO 3":{"D":4,"K":4},"ROO 1":{"D":4,"K":3},"ROO 2":{"D":4,"K":3},"ROO 3":{"D":4,"K":3},"ROO 4":{"D":4,"K":3},"ROO 5":{"D":4,"K":3},"ROO 6":{"D":4,"K":3},"ROO 7":{"D":4,"K":3},"ROO 8":{"D":4,"K":3},"ROO 9":{"D":4,"K":3},"ROO 10":{"D":4,"K":""}}},{"no":3,"nama":"Erik Wiradelano","unit":"Dis PMD","scores":{"RSO 1":{"D":5,"K":4},"RSO 2":{"D":5,"K":4},"RSO 3":{"D":5,"K":4},"ROO 1":{"D":4,"K":3},"ROO 2":{"D":4,"K":3},"ROO 3":{"D":4,"K":3},"ROO 4":{"D":4,"K":3},"ROO 5":{"D":4,"K":3},"ROO 6":{"D":4,"K":3},"ROO 7":{"D":4,"K":3},"ROO 8":{"D":4,"K":3},"ROO 9":{"D":4,"K":3},"ROO 10":{"D":4,"K":""}}},{"no":4,"nama":"Adrianto","unit":"Dis PMD","scores":{"RSO 1":{"D":5,"K":4},"RSO 2":{"D":5,"K":4},"RSO 3":{"D":5,"K":4},"ROO 1":{"D":4,"K":3},"ROO 2":{"D":4,"K":3},"ROO 3":{"D":4,"K":3},"ROO 4":{"D":4,"K":3},"ROO 5":{"D":4,"K":3},"ROO 6":{"D":4,"K":3},"ROO 7":{"D":4,"K":3},"ROO 8":{"D":4,"K":3},"ROO 9":{"D":4,"K":3},"ROO 10":{"D":4,"K":""}}},{"no":5,"nama":"Moh. Akbar, SH","unit":"Dis PMD","scores":{"RSO 1":{"D":4,"K":4},"RSO 2":{"D":4,"K":4},"RSO 3":{"D":4,"K":4},"ROO 1":{"D":3,"K":3},"ROO 2":{"D":3,"K":3},"ROO 3":{"D":3,"K":3},"ROO 4":{"D":3,"K":3},"ROO 5":{"D":3,"K":3},"ROO 6":{"D":3,"K":3},"ROO 7":{"D":3,"K":3},"ROO 8":{"D":3,"K":3},"ROO 9":{"D":3,"K":3},"ROO 10":{"D":3,"K":""}}},{"no":6,"nama":"Kurniati, SE, Ak, M.Si","unit":"Dis PMD","scores":{"RSO 1":{"D":4,"K":4},"RSO 2":{"D":4,"K":4},"RSO 3":{"D":4,"K":4},"ROO 1":{"D":3,"K":4},"ROO 2":{"D":3,"K":4},"ROO 3":{"D":3,"K":4},"ROO 4":{"D":3,"K":4},"ROO 5":{"D":3,"K":4},"ROO 6":{"D":3,"K":4},"ROO 7":{"D":3,"K":4},"ROO 8":{"D":3,"K":4},"ROO 9":{"D":3,"K":4},"ROO 10":{"D":3,"K":""}}},{"no":7,"nama":"Rahma, S.Sos","unit":"Dis PMD","scores":{"RSO 1":{"D":4,"K":4},"RSO 2":{"D":4,"K":4},"RSO 3":{"D":4,"K":4},"ROO 1":{"D":3,"K":3},"ROO 2":{"D":3,"K":3},"ROO 3":{"D":3,"K":3},"ROO 4":{"D":3,"K":3},"ROO 5":{"D":3,"K":3},"ROO 6":{"D":3,"K":3},"ROO 7":{"D":3,"K":3},"ROO 8":{"D":3,"K":3},"ROO 9":{"D":3,"K":3},"ROO 10":{"D":3,"K":""}}},{"no":8,"nama":"Rahmi Riftianda, SE., MM","unit":"Dis PMD","scores":{"RSO 1":{"D":4,"K":4},"RSO 2":{"D":4,"K":4},"RSO 3":{"D":4,"K":4},"ROO 1":{"D":4,"K":3},"ROO 2":{"D":4,"K":3},"ROO 3":{"D":4,"K":3},"ROO 4":{"D":4,"K":3},"ROO 5":{"D":4,"K":3},"ROO 6":{"D":4,"K":3},"ROO 7":{"D":4,"K":3},"ROO 8":{"D":4,"K":3},"ROO 9":{"D":4,"K":3},"ROO 10":{"D":4,"K":""}}},{"no":9,"nama":"Sofliatul Imaniyah, S.Kom, MAP","unit":"Dis PMD","scores":{"RSO 1":{"D":5,"K":4},"RSO 2":{"D":5,"K":4},"RSO 3":{"D":5,"K":4},"ROO 1":{"D":4,"K":4},"ROO 2":{"D":5,"K":4},"ROO 3":{"D":5,"K":4},"ROO 4":{"D":5,"K":4},"ROO 5":{"D":5,"K":4},"ROO 6":{"D":4,"K":4},"ROO 7":{"D":4,"K":4},"ROO 8":{"D":4,"K":4},"ROO 9":{"D":4,"K":4},"ROO 10":{"D":4,"K":""}}},{"no":10,"nama":"Alvira, S.Sos","unit":"Dis PMD","scores":{"RSO 1":{"D":5,"K":4},"RSO 2":{"D":5,"K":4},"RSO 3":{"D":4,"K":4},"ROO 1":{"D":4,"K":4},"ROO 2":{"D":5,"K":4},"ROO 3":{"D":5,"K":4},"ROO 4":{"D":5,"K":4},"ROO 5":{"D":5,"K":4},"ROO 6":{"D":4,"K":4},"ROO 7":{"D":4,"K":4},"ROO 8":{"D":4,"K":4},"ROO 9":{"D":4,"K":4},"ROO 10":{"D":4,"K":""}}}]},"form4hasil":{"namaPemda":"Pemerintah Provinsi Sulawesi Tengah","tahun":"2026","tujuanStrategis":"Meningkatnya Pemberdayaan Masyarakat dan Pemberdayaan Desa","urusan":"Urusan Wajib bukan Pelayanan Dasar","records":[{"group":"Risiko Strategis OPD 1:","no":1,"risiko":"Penyesuaian IDM Menjadi Indeks desa mengakibatkan Status Desa menurun","kode":"RSO.26.13.16.01","dampak":5,"kemungkinan":4,"skala":24},{"group":"Risiko Strategis OPD 1:","no":2,"risiko":"Desa berkembang cenderung tidak berupaya naik status karena alokasi dana desa akan berkurang","kode":"RSO.26.13.16.02","dampak":5,"kemungkinan":4,"skala":24},{"group":"Risiko Strategis OPD 1:","no":3,"risiko":"Desa tertinggal tidak berupaya naik status karena akan kehilangan dana afirmasi dan tunjangan Dacil","kode":"RSO.26.13.16.03","dampak":4,"kemungkinan":4,"skala":19},{"group":"Risiko Operasional OPD 1:","no":1,"risiko":"Paket pekerjaan yang beragam dari Bappeda","kode":"ROO 26.13.16.01","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":2,"risiko":"Tidak tersedianya SSH dari pihak ketiga","kode":"ROO 26.13.16.02","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":3,"risiko":"Pengantaran barang terlambat","kode":"ROO 26.13.16.03","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":4,"risiko":"penyusunan laporan terlambat","kode":"ROO 26.13.16.04","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":5,"risiko":"Fasilitasi Pelaksanaan EPDESKEL mengikuti Pekan Inovasi Desa/Kelurahan","kode":"ROO 26.13.16.05","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":6,"risiko":"Rapat tim untuk kegiatan Pembinaan Aparatur Pemerintah Desa","kode":"ROO 26.13.16.06","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":7,"risiko":"Penyesuaian anggaran di Kabupaten pelaksana kegiatan","kode":"ROO 26.13.16.07","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":8,"risiko":"Aparatur Desa tidak menerapkan hasil bimtek dalam penyelenggaraan Pemerintah Desanya","kode":"ROO 26.13.16.08","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":9,"risiko":"Penyusunan laporan terlambat","kode":"ROO 26.13.16.09","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":10,"risiko":"Fasilitasi Pelaksanaan Profile Desa Dan Kelurahan bagi Pemerintah Desa /Kelurahan yang belum melakukan Pengimputan serta Up Date Data secara berkelanjutan ","kode":"ROO 26.13.16.10","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":11,"risiko":"Fasilitasi penetapan dan penegasan tapal batas bagi Pemerintah Desa yang sudah dilakukan tidak berkelanjutan","kode":"ROO 26.13.16.11","dampak":4,"kemungkinan":3,"skala":17},{"group":"Risiko Operasional OPD 1:","no":12,"risiko":"Pemanfataan bantuan sarana prasarana oleh LKD dan masyarakat tidak optimal","kode":"ROO 26.13.16.12","dampak":4,"kemungkinan":4,"skala":19},{"group":"Risiko Operasional OPD 1:","no":13,"risiko":"Sasaran masyarakat miskin untuk pengembangan kewirausahaan dalam unit BUM Desa belum terakomodir secara optimal","kode":"ROO 26.13.16.13","dampak":5,"kemungkinan":4,"skala":24},{"group":"Risiko Operasional OPD 1:","no":14,"risiko":"Kompetensi narasumber dan pelatih mempengaruhi hasil penyerapan ilmu dan keterampilan tentang pengembangan BUM Desa","kode":"ROO 26.13.16.14","dampak":4,"kemungkinan":4,"skala":19},{"group":"Risiko Operasional OPD 1:","no":15,"risiko":"Hasil usaha gagal karena Perencanaan Bisnis yang kurang matang pada pemilihan unit usaha yang tidak didasari kemampuan teknis pengelolaan usaha dan topografi wilayah desa","kode":"ROO 26.13.16.15","dampak":4,"kemungkinan":4,"skala":19},{"group":"Risiko Operasional OPD 1:","no":16,"risiko":"Jumlah target dan lokasi desa percontohan pelaksanaan kegiatan tidak sesuai dengan rencana kerja awal yang sudah ditetapkan","kode":"ROO 26.13.16.16","dampak":5,"kemungkinan":5,"skala":25},{"group":"Risiko Operasional OPD 1:","no":17,"risiko":"Rencana aksi program kegiatan yang sudah dirumuskan harus dilakukan perubahan menyesuaikan ketersediaan anggaran","kode":"ROO 26.13.16.17","dampak":4,"kemungkinan":4,"skala":19}]},"form5":{"namaPemda":"Pemerintah Provinsi Sulawesi Tengah","tahun":"2026","tujuanStrategis":"Menurunkan Kemiskinan","urusan":"Urusan Wajib bukan Pelayanan Dasar","records":[{"group":"Risiko Strategis OPD","no":1,"risiko":"Penyesuaian IDM Menjadi Indeks desa mengakibatkan Status Desa menurun","kode":"RSO.26.13.16.01","skala":24,"pemilik":"Kadis. PMD","penyebab":"Pemerintah Desa belum memahami perubahan indikator IDM menjadi Indeks desa dalam pengukuran kemajuan desa","dampak":"Status Desa menurun"},{"group":"Risiko Strategis OPD","no":2,"risiko":"Desa berkembang cenderung tidak berupaya naik status karena alokasi dana desa akan berkurang","kode":"RSO.26.13.16.02","skala":24,"pemilik":"Kadis. PMD","penyebab":"Pemerintah Desa belum menggunakan rekomendasi indeks desa untuk perencanaan dan pembangunan dalam peningkatan status desa ","dampak":"Peningkatan status desa mandiri belum signifikan "},{"group":"Risiko Strategis OPD","no":3,"risiko":"Desa tertinggal tidak berupaya naik status karena akan kehilangan dana afirmasi dan tunjangan Dacil","kode":"RSO.26.13.16.03","skala":19,"pemilik":"Kadis. PMD","penyebab":"Pemerintah Desa belum memahami tujuan pemberian dana desa untuk peningkatan status desa","dampak":"Peningkatan status perkembangan desa rendah"},{"group":"Risiko Operasional OPD","no":1,"risiko":"Paket pekerjaan yang beragam dari Bappeda","kode":"ROO 26.13.16.01","skala":17,"pemilik":"Pemprov Sulteng","penyebab":"Paket belum di seleksi oleh kamus pokir","dampak":"Paket pekerjaan lebih sesuai dengan kebutuhan di lapangan"},{"group":"Risiko Operasional OPD","no":2,"risiko":"Tidak tersedianya SSH dari pihak ketiga","kode":"ROO 26.13.16.02","skala":17,"pemilik":"Pemprov Sulteng","penyebab":"Pihak ketiga tidak melakukan survei harga barang","dampak":"OPD yang turun melakukan survei harga barang"},{"group":"Risiko Operasional OPD","no":3,"risiko":"Pengantaran barang terlambat","kode":"ROO 26.13.16.03","skala":17,"pemilik":"Pemprov Sulteng","penyebab":"Rincian barang di proposal tidak ada di aplikasi SIPD","dampak":"Realisasi belanja hibah terhambat"},{"group":"Risiko Operasional OPD","no":4,"risiko":"penyusunan laporan terlambat","kode":"ROO 26.13.16.04","skala":17,"pemilik":"Pemprov Sulteng","penyebab":"Barang yang datang kurang, tidak sesuai atau terlambat","dampak":"Realisasi belanja hibah terhambat"},{"group":"Risiko Operasional OPD","no":5,"risiko":"Fasilitasi Pelaksanaan EPDESKEL mengikuti Pekan Inovasi Desa/Kelurahan","kode":"ROO 26.13.16.05","skala":17,"pemilik":"Kadis DPMD/ Kabid Penataan dan Perkembangan Desa","penyebab":"Desa dan Kelurahan yang berpartisipasi mengikuti Pekan Inovasi Desa/Kelurahan rendah","dampak":"Akses informasi tentang inovasi Desa dan Kelurahan terkait dngan partisipasi penilaian EPDESKEL/ID terkait dukungan sumber daya"},{"group":"Risiko Operasional OPD","no":6,"risiko":"Rapat tim untuk kegiatan Pembinaan Aparatur Pemerintah Desa","kode":"ROO 26.13.16.06","skala":17,"pemilik":"Kadis DPMD/ Kabid Pemerintahan Desa","penyebab":"Belum adanya standarisasi peserta","dampak":"Sudah terverifikasi calon pembinaan Aparatur Pemerintah Desa"},{"group":"Risiko Operasional OPD","no":7,"risiko":"Penyesuaian anggaran di Kabupaten pelaksana kegiatan","kode":"ROO 26.13.16.07","skala":17,"pemilik":"Kadis DPMD/ Kabid Pemerintahan Desa","penyebab":"Standarisasi pelaksanaan di kabupaten menyesuaikan dengan provinsi","dampak":"Standarisasi pelaksanaan di kabupaten menyesuaikan dengan provinsi"},{"group":"Risiko Operasional OPD","no":8,"risiko":"Aparatur Desa tidak menerapkan hasil bimtek dalam penyelenggaraan Pemerintah Desanya","kode":"ROO 26.13.16.08","skala":17,"pemilik":"Kadis DPMD/ Kabid Pemerintahan Desa","penyebab":"Pelayanan publik tidak  maksimal","dampak":"Pelayanan publik tidak  maksimal"},{"group":"Risiko Operasional OPD","no":9,"risiko":"Penyusunan laporan terlambat","kode":"ROO 26.13.16.09","skala":17,"pemilik":"Kadis DPMD/ Kabid Pemerintahan Desa","penyebab":"Realisasi terhambat","dampak":"Realisasi terhambat"},{"group":"Risiko Operasional OPD","no":10,"risiko":"Fasilitasi Pelaksanaan Profile Desa Dan Kelurahan bagi Pemerintah Desa /Kelurahan yang belum melakukan Pengimputan serta Up Date Data secara berkelanjutan ","kode":"ROO 26.13.16.10","skala":17,"pemilik":"Kadis DPMD/ Kabid Penataan dan Perkembangan Desa","penyebab":"Desa Dan Kelurahan yang melakukan Pengimputan dan Up Date Data Pro DesKel Maih Rendah","dampak":"Ketidak sesuaian data ProDesKel/tidak validnya Data sesuai kebutuhan perencanaan"},{"group":"Risiko Operasional OPD","no":11,"risiko":"Fasilitasi penetapan dan penegasan tapal batas bagi Pemerintah Desa yang sudah dilakukan tidak berkelanjutan","kode":"ROO 26.13.16.11","skala":17,"pemilik":"Kadis PMD/Kabid. Penataan dan Perkembangan Desa","penyebab":"Biaya pendampingan Program ILLASPP di Kab. Toli-Toli dan Kab. Donggala","dampak":"Proses penetapan PERBUB  penegasan batas desa di 2 Kabupaten"},{"group":"Risiko Operasional OPD","no":12,"risiko":"Pemanfataan bantuan sarana prasarana oleh LKD dan masyarakat tidak optimal","kode":"ROO 26.13.16.12","skala":19,"pemilik":"Kadis PMD/Kabid. Pemberdayaan Lembaga Kemasyarakatan Desa","penyebab":"Perlunya pemahaman staf DPRD Provinsi Sulawesi Tengah dalam melakukan penginputan pokir","dampak":"Bantuan sarana dan prasarana  tidak dimanfaatkan maksimal oleh LKD kepada masyarakat"},{"group":"Risiko Operasional OPD","no":13,"risiko":"Sasaran masyarakat miskin untuk pengembangan kewirausahaan dalam unit BUM Desa belum terakomodir secara optimal","kode":"ROO 26.13.16.13","skala":24,"pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","penyebab":"Pemerintah Desa belum memahami peran BUM Desa dalam penanggulangan kemiskinan","dampak":"Upaya menurunkan tingkat kemiskinan di desa belum terlaksana secara optimal"},{"group":"Risiko Operasional OPD","no":14,"risiko":"Kompetensi narasumber dan pelatih mempengaruhi hasil penyerapan ilmu dan keterampilan tentang pengembangan BUM Desa","kode":"ROO 26.13.16.14","skala":19,"pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","penyebab":"Pemilihan narasumber dan pelatih yang kurang selektif","dampak":"Usaha BUM Desa tidak berkembang karena pemahaman dan keterampilan pengurus dan pengelola unit usaha Bum Desa tidak meningkat"},{"group":"Risiko Operasional OPD","no":15,"risiko":"Hasil usaha gagal karena Perencanaan Bisnis yang kurang matang pada pemilihan unit usaha yang tidak didasari kemampuan teknis pengelolaan usaha dan topografi wilayah desa","kode":"ROO 26.13.16.15","skala":19,"pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","penyebab":"Kemampuan Pengurus BUM Desa dan Unit Usaha BUM Desa dalam perencanaan BUM Desa masih rendah","dampak":"Usaha BUM Desa tidak berkembang karena  Pengurus dan pengelola unit usaha  BUM Desa tidak memiliki kemampuan teknis pengelolaan usaha"},{"group":"Risiko Operasional OPD","no":16,"risiko":"Jumlah target dan lokasi desa percontohan pelaksanaan kegiatan tidak sesuai dengan rencana kerja awal yang sudah ditetapkan","kode":"ROO 26.13.16.16","skala":25,"pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","penyebab":"Penerapan efisiensi anggaran","dampak":"Peningkatan peran BUM Desa dalam meningkatkan perekonomian desa di lokasi desa percontohan tidak maksimal"},{"group":"Risiko Operasional OPD","no":17,"risiko":"Rencana aksi program kegiatan yang sudah dirumuskan harus dilakukan perubahan menyesuaikan ketersediaan anggaran","kode":"ROO 26.13.16.17","skala":19,"pemilik":"Kadis PMD/Kabid. Pemberdayaan Desa","penyebab":"Penerapan efisiensi anggaran","dampak":"Peningkatan peran BUM Desa dalam meningkatkan perekonomian desa di lokasi desa percontohan tidak maksimal"}]},"form7":{"namaPemda":"Pemerintah Provinsi Sulawesi Tengah","tahun":"2026","tujuanStrategis":"Meningkatnya Pemberdayaan Masyarakat dan Pemberdayaan Desa","urusan":"Urusan Wajib bukan Pelayanan Dasar","records":[{"group":"Risiko Strategis OPD","no":1,"risiko":"Penyesuaian IDM Menjadi Indeks desa mengakibatkan Status Desa menurun","kode":"RSO.26.13.16.01","pengendalianAda":"Optimalisasi pencegahan terjadniya bencana","celah":"Prosedur sudah dilakukan ","rtp":"Rapat Koordinasi dengan DPMD Kabupaten dan OPD terkait","pj":"Kadis PMD/Kabid. Pada semua bidang","targetWaktu":"TW 1 DAN TW II"},{"group":"Risiko Strategis OPD","no":2,"risiko":"Desa berkembang cenderung tidak berupaya naik status karena alokasi dana desa akan berkurang","kode":"RSO.26.13.16.02","pengendalianAda":"Optimalisasi pengawasan pada saat pemutahiran Data IDM ","celah":"Prosedur sudah dilakukan namum belum optimal meminimalisir rsiko yang terjadi","rtp":"Koordinasi melalui Rapat dan kunjungan lapangan","pj":"Kadis PMD/Kabid. Pada semua bidang","targetWaktu":"TW 1 DAN TW II"},{"group":"Risiko Strategis OPD","no":3,"risiko":"Desa tertinggal tidak berupaya naik status karena akan kehilangan dana afirmasi dan tunjangan Dacil","kode":"RSO.26.13.16.03","pengendalianAda":"Optimalisasi pengawasan pada saat pemutahiran Data IDM ","celah":"Prosedur sudah dilakukan namum belum optimal meminimalisir rsiko yang terjadi","rtp":"Koordinasi melalui Rapat dan kunjungan lapangan","pj":"Kadis PMD/Kabid. Pada semua bidang","targetWaktu":"TW 1 DAN TW II"},{"group":"Risiko Operasional OPD","no":1,"risiko":"Pemanfataan bantuan sarana prasarana oleh LKD dan masyarakat tidak optimal","kode":"ROO 26.13.16.05","pengendalianAda":"Koordinasi dengan DPMD Kabupaten dan Pemerintah Desa","celah":"Prosedur sudah dilakukan namum belum optimal meminimalisir rsiko yang terjadi","rtp":"Peningkatan monitoring dan evaluasi","pj":"Kadis PMD/Kabid. Pada semua bidang","targetWaktu":""},{"group":"Risiko Operasional OPD","no":2,"risiko":"Sasaran masyarakat miskin untuk pengembangan kewirausahaan dalam unit BUM Desa belum terakomodir secara optimal","kode":"ROO 26.13.16.04","pengendalianAda":"Koordinasi dengan DPMD Kabupaten dan Pemerintah Desa","celah":"Prosedur sudah dilakukan namum belum optimal meminimalisir rsiko yang terjadi","rtp":"Pembinaan dan Pendampingan Penguatan peran BUM Desa dalam penanggulangan kemiskinan ","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","targetWaktu":"TW. I sd IV"},{"group":"Risiko Operasional OPD","no":3,"risiko":"Kompetensi narasumber dan pelatih mempengaruhi hasil penyerapan ilmu dan keterampilan tentang pengembangan BUM Desa","kode":"ROO 26.13.16.09","pengendalianAda":"Koordinasi dengan DPMD Kabupaten dan Pemerintah Desa","celah":"Prosedur sudah dilakukan namum belum optimal meminimalisir rsiko yang terjadi","rtp":"Pelatihan/Bimtek Manajemen Perencanaan Bisnis BUM Desa","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","targetWaktu":"TW. I sd IV"},{"group":"Risiko Operasional OPD","no":4,"risiko":"Hasil usaha gagal karena Perencanaan Bisnis yang kurang matang pada pemilihan unit usaha yang tidak didasari kemampuan teknis pengelolaan usaha dan topografi wilayah desa","kode":"ROO 26.13.16.10","pengendalianAda":"Koordinasi dengan  stakeholder terkait, DPMD Kabupaten dan Pemerintah Desa","celah":"Prosedur sudah dilakukan namum belum optimal meminimalisir rsiko yang terjadi","rtp":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","targetWaktu":"TW. I sd IV"},{"group":"Risiko Operasional OPD","no":5,"risiko":"Jumlah target dan lokasi desa percontohan pelaksanaan kegiatan tidak sesuai dengan rencana kerja awal yang sudah ditetapkan","kode":"ROO 26.13.16.11","pengendalianAda":"Koordinasi dengan DPMD Kabupaten dan Pemerintah Desa","celah":"Prosedur sudah dilakukan namum belum optimal meminimalisir rsiko yang terjadi","rtp":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","targetWaktu":"TW. I"},{"group":"Risiko Operasional OPD","no":6,"risiko":"Rencana aksi program kegiatan yang sudah dirumuskan harus dilakukan perubahan menyesuaikan ketersediaan anggaran","kode":"ROO 26.13.16.12","pengendalianAda":"Koordinasi dengan DPMD Kabupaten dan Pemerintah Desa","celah":"Prosedur sudah dilakukan namum belum optimal meminimalisir rsiko yang terjadi","rtp":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","targetWaktu":"TW. I dan II"}]},"form8":{"namaPemda":"Pemerintah Provinsi Sulawesi Tengah","tahun":"2026","tujuanStrategis":"Meningkatnya Pemberdayaan Masyarakat dan Pemberdayaan Desa","urusan":"Urusan Wajib bukan Pelayanan Dasar","records":[{"group":"Risiko Strategis","no":1,"kegiatanPengendalian":"Rapat Koordinasi dengan DPMD Kabupaten dan OPD terkait","media":"Rapat koordinasi Peningkatan Status Desa","penyedia":"Dinas PMD Provinsi Sulawesi Tengah","penerima":"Bappeda Provinsi Sulawesi Tengah dan Dinas PMD Kabupaten","rencanaWaktu":"TW 1  dan TW 2","realisasiWaktu":"-","keterangan":"Telah dilaksanakan"},{"group":"Risiko Strategis","no":2,"kegiatanPengendalian":"Koordinasi melalui Rapat dan kunjungan lapangan","media":"Rapat koordinasi Penguatan Intervensi Indeks Desa","penyedia":"Dinas PMD Provinsi Sulawesi Tengah","penerima":"Dinas PMD Kabupaten / Pemerintah Desa ","rencanaWaktu":"TW 1  dan TW 2","realisasiWaktu":"TW 1  dan TW 2","keterangan":"Telah dilaksanakan"},{"group":"Risiko Strategis","no":3,"kegiatanPengendalian":"Koordinasi melalui Rapat dan kunjungan lapangan","media":"Rapat koordinasi Penguatan Intervensi Indeks Desa","penyedia":"Dinas PMD Provinsi Sulawesi Tengah","penerima":"Dinas PMD Kabupaten / Pemerintah Desa ","rencanaWaktu":"TW 1  dan TW 2","realisasiWaktu":"TW 1  dan TW 2","keterangan":"Telah dilaksanakan"},{"group":"Risiko Operasional","no":1,"kegiatanPengendalian":"Peningkatan monitoring dan evaluasi","media":"","penyedia":"","penerima":"","rencanaWaktu":"","realisasiWaktu":"","keterangan":""},{"group":"Risiko Operasional","no":2,"kegiatanPengendalian":"Pembinaan dan Pendampingan Penguatan peran BUM Desa dalam penanggulangan kemiskinan ","media":"Sosialisasi dan Pendampingan","penyedia":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","penerima":"DPMD Kabupaten, Pemerintah Desa dan BUM Desa","rencanaWaktu":"TW 1 sd 4","realisasiWaktu":"TW 1 dan 2","keterangan":"Koordinasi telah dilaksanakan,  dokumen form pengisian tersedia"},{"group":"Risiko Operasional","no":3,"kegiatanPengendalian":"Pelatihan/Bimtek Manajemen Perencanaan Bisnis BUM Desa","media":"Koordinasi dan surat penyampaian","penyedia":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","penerima":"DPMD Kabupaten","rencanaWaktu":"TW 1 sd 4","realisasiWaktu":"TW 1 dan 2","keterangan":"Koordinasi telah dilaksanakan"},{"group":"Risiko Operasional","no":4,"kegiatanPengendalian":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","media":"Bimbingan Teknis dan Pelatihan","penyedia":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","penerima":"DPMD Kabupaten, Pemerintah Desa dan BUM Desa","rencanaWaktu":"TW 1 sd 4","realisasiWaktu":"TW 1 dan 2","keterangan":"Koordinasi dan Pendampingan telah dilaksanakan"},{"group":"Risiko Operasional","no":4,"kegiatanPengendalian":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","media":"Membuat Telaahan Staf Penambahan Anggaran dan Kerjasama CSR, Perbankan","penyedia":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","penerima":"Bappeda Provinsi Sulawesi Tengah","rencanaWaktu":"TW 1 ","realisasiWaktu":"TW 1 ","keterangan":"Dokumen tersedia dan telah didisitribusikan"},{"group":"Risiko Operasional","no":5,"kegiatanPengendalian":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","media":"Perbaikan Rencana Kerja dan Anggaran","penyedia":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","penerima":"Bappeda Provinsi Sulawesi Tengah","rencanaWaktu":"TW 1 ","realisasiWaktu":"TW 1 ","keterangan":"Dokumen tersedia "}]},"form9":{"namaPemda":"Pemerintah Provinsi Sulawesi Tengah","tahun":"2026","urusan":"Urusan Wajib bukan Pelayanan Dasar","records":[{"group":"Risiko Strategis","no":1,"kegiatanPengendalian":"Rapat Koordinasi dengan DPMD Kabupaten dan OPD terkait","bentukPemantauan":"Rapat koordinasi Peningkatan Status Desa","pj":"Kepala Dinas PMD Provinsi Sulawesi Tengah","rencanaWaktu":"TW 1  dan TW 2","realisasiWaktu":"TW 1  dan TW 2","keterangan":"Telah dilaksanakan"},{"group":"Risiko Strategis","no":2,"kegiatanPengendalian":"Koordinasi melalui Rapat dan kunjungan lapangan","bentukPemantauan":"Rapat koordinasi Penguatan Intervensi Indeks Desa","pj":"Kepala Dinas PMD Provinsi Sulawesi Tengah","rencanaWaktu":"TW 1  dan TW 2","realisasiWaktu":"TW 1  dan TW 2","keterangan":"Telah dilaksanakan"},{"group":"Risiko Strategis","no":3,"kegiatanPengendalian":"Koordinasi melalui Rapat dan kunjungan lapangan","bentukPemantauan":"Rapat koordinasi Penguatan Intervensi Indeks Desa","pj":"Kepala Dinas PMD Provinsi Sulawesi Tengah","rencanaWaktu":"TW 1  dan TW 2","realisasiWaktu":"TW 1  dan TW 2","keterangan":"Telah dilaksanakan"},{"group":"Risiko Operasional","no":1,"kegiatanPengendalian":"Peningkatan monitoring dan evaluasi","bentukPemantauan":"","pj":"Sekretaris Dinas PMD Prov. Sulteng","rencanaWaktu":"","realisasiWaktu":"","keterangan":""},{"group":"Risiko Operasional","no":2,"kegiatanPengendalian":"Pembinaan dan Pendampingan Penguatan peran BUM Desa dalam penanggulangan kemiskinan ","bentukPemantauan":"Koordinasi dan Form pelaporan","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","rencanaWaktu":"TW 2","realisasiWaktu":"TW 2","keterangan":"Koordinasi telah dilaksanakan,  dokumen form pengisian tersedia"},{"group":"Risiko Operasional","no":3,"kegiatanPengendalian":"Pelatihan/Bimtek Manajemen Perencanaan Bisnis BUM Desa","bentukPemantauan":"Koordinasi dan penentuan syarat komptensi Narasumber","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","rencanaWaktu":"TW 1 dan 2","realisasiWaktu":"TW 1 dan 2","keterangan":"Koordinasi telah dilaksanakan"},{"group":"Risiko Operasional","no":4,"kegiatanPengendalian":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","bentukPemantauan":"Koordinasi dan Pendampingan","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","rencanaWaktu":"TW 1 dan 2","realisasiWaktu":"TW 1 dan 2","keterangan":"Koordinasi dan Pendampingan belum dilaksanakan"},{"group":"Risiko Operasional","no":5,"kegiatanPengendalian":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","bentukPemantauan":"Menyampaikan telaahan staf","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","rencanaWaktu":"TW 1 ","realisasiWaktu":"TW 1 ","keterangan":"Dokumen tersedia dan telah didisitribusikan"},{"group":"Risiko Operasional","no":6,"kegiatanPengendalian":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","bentukPemantauan":"Perubahan RKA","pj":"Kabid. Pemberdayaan Desa DPMD Prov. Sulteng","rencanaWaktu":"TW 2","realisasiWaktu":"TW 2","keterangan":"Dokumen tersedia "}]},"form10":{"namaPemda":"Pemerintah Provinsi Sulawesi Tengah","tahun":"2026","urusan":"Urusan Wajib bukan Pelayanan Dasa","records":[{"group":"Risiko Strategis ","no":1,"risiko":"Penyesuaian IDM Menjadi Indeks desa mengakibatkan Status Desa menurun","kode":"RSO.26.13.16.01","tempat":"Dinas PMD Prov. Sulteng","tanggalTerjadi":"Januari 2026","sebab":"Pemerintah Desa belum memahami perubahan indikator IDM menjadi Indeks desa dalam pengukuran kemajuan desa","dampak":"Status Desa menurun","keterangan1":"-","rtp":"Rapat Koordinasi dengan DPMD Kabupaten dan OPD terkait","rencanaWaktuRtp":"TW 1  dan TW 2","realisasiRtp":"TW 1  dan TW 2","tanggalRtp":"TW 1 dan TW 2","bukti":"","keterangan2":"Telah dilaksanakan"},{"group":"Risiko Strategis ","no":2,"risiko":"Desa berkembang cenderung tidak berupaya naik status karena alokasi dana desa akan berkurang","kode":"RSO.26.13.16.02","tempat":"Pemerintah Desa","tanggalTerjadi":"","sebab":"Pemerintah Desa belum menggunakan rekomendasi indeks desa untuk perencanaan dan pembangunan dalam peningkatan status desa ","dampak":"Peningkatan status desa mandiri belum signifikan ","keterangan1":"","rtp":"Koordinasi melalui Rapat dan kunjungan lapangan","rencanaWaktuRtp":"TW 1  dan TW 2","realisasiRtp":"TW 1  dan TW 2","tanggalRtp":"TW 1 dan TW 2","bukti":"","keterangan2":"Telah dilaksanakan"},{"group":"Risiko Strategis ","no":3,"risiko":"Desa tertinggal tidak berupaya naik status karena akan kehilangan dana afirmasi dan tunjangan Dacil","kode":"RSO.26.13.16.03","tempat":"Pemerintah Desa","tanggalTerjadi":"","sebab":"Pemerintah Desa belum memahami tujuan pemberian dana desa untuk peningkatan status desa","dampak":"Peningkatan status perkembangan desa rendah","keterangan1":"","rtp":"Koordinasi melalui Rapat dan kunjungan lapangan","rencanaWaktuRtp":"TW 1  dan TW 2","realisasiRtp":"TW 1  dan TW 2","tanggalRtp":"TW 1 dan TW 2","bukti":"","keterangan2":"Telah dilaksanakan"},{"group":"Risiko Operasional ","no":1,"risiko":"Paket pekerjaan yang beragam dari Bappeda","kode":"ROO. 26.13.16.01","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Paket belum di seleksi oleh kamus pokir","dampak":"Paket pekerjaan lebih sesuai dengan kebutuhan di lapangan","keterangan1":"","rtp":"Koordinasi melalui rapat, bimtek dan kunjungan lapangan","rencanaWaktuRtp":"TW 1- 4","realisasiRtp":"TW 1- 4","tanggalRtp":"TW 1- 4","bukti":"","keterangan2":""},{"group":"Risiko Operasional ","no":2,"risiko":"Tidak tersedianya SSH dari pihak ketiga","kode":"ROO. 26.13.16.02","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Pihak ketiga tidak melakukan survei harga barang","dampak":"OPD yang turun melakukan survei harga barang","keterangan1":"","rtp":"Koordinasi melalui rapat, bimtek dan kunjungan lapangan","rencanaWaktuRtp":"TW 1- 4","realisasiRtp":"TW 1- 4","tanggalRtp":"TW 1- 4","bukti":"","keterangan2":""},{"group":"Risiko Operasional ","no":3,"risiko":"Pengantaran barang terlambat","kode":"ROO. 26.13.16.03","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Rincian barang di proposal tidak ada di aplikasi SIPD","dampak":"Realisasi belanja hibah terhambat","keterangan1":"","rtp":"Koordinasi melalui rapat, bimtek dan kunjungan lapangan","rencanaWaktuRtp":"TW 1- 4","realisasiRtp":"TW 1- 4","tanggalRtp":"TW 1- 4","bukti":"","keterangan2":""},{"group":"Risiko Operasional ","no":4,"risiko":"penyusunan laporan terlambat","kode":"ROO. 26.13.16.04","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Barang yang datang kurang, tidak sesuai atau terlambat","dampak":"Realisasi belanja hibah terhambat","keterangan1":"","rtp":"Koordinasi melalui rapat, bimtek dan kunjungan lapangan","rencanaWaktuRtp":"TW 1- 4","realisasiRtp":"TW 1- 4","tanggalRtp":"TW 1- 4","bukti":"","keterangan2":""},{"group":"Risiko Operasional ","no":5,"risiko":"Fasilitasi Pelaksanaan EPDESKEL mengikuti Pekan Inovasi Desa/Kelurahan","kode":"ROO. 26.13.16.05","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Desa dan Kelurahan yang berpartisipasi mengikuti Pekan Inovasi Desa/Kelurahan rendah","dampak":"Akses informasi tentang inovasi Desa dan Kelurahan terkait dngan partisipasi penilaian EPDESKEL/ID terkait dukungan sumber daya","keterangan1":"","rtp":"Fasilitasi Evaluasi Perkembagan Desa serta lomba desa terkait validasi data dan Update data EpDesKel ","rencanaWaktuRtp":"TW I","realisasiRtp":"TW I","tanggalRtp":"12 Januari ","bukti":"pelaporan dan Dokumentasi","keterangan2":"Telah dilaksanakan"},{"group":"Risiko Operasional ","no":6,"risiko":"Rapat tim untuk kegiatan Pembinaan Aparatur Pemerintah Desa","kode":"ROO. 26.13.16.06","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Belum adanya standarisasi peserta","dampak":"Sudah terverifikasi calon pembinaan Aparatur Pemerintah Desa","keterangan1":"","rtp":"Koordinasi melalui rapat, bimtek dan kunjungan lapangan","rencanaWaktuRtp":"TW 1- 4","realisasiRtp":"TW 1- 4","tanggalRtp":"TW 1- 4","bukti":"","keterangan2":""},{"group":"Risiko Operasional ","no":7,"risiko":"Penyesuaian anggaran di Kabupaten pelaksana kegiatan","kode":"ROO. 26.13.16.07","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Standarisasi pelaksanaan di kabupaten menyesuaikan dengan provinsi","dampak":"Standarisasi pelaksanaan di kabupaten menyesuaikan dengan provinsi","keterangan1":"","rtp":"Koordinasi melalui rapat, bimtek dan kunjungan lapangan","rencanaWaktuRtp":"TW 1- 4","realisasiRtp":"TW 1- 4","tanggalRtp":"TW 1- 4","bukti":"","keterangan2":""},{"group":"Risiko Operasional ","no":8,"risiko":"Aparatur Desa tidak menerapkan hasil bimtek dalam penyelenggaraan Pemerintah Desanya","kode":"ROO. 26.13.16.08","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Pelayanan publik tidak  maksimal","dampak":"Pelayanan publik tidak  maksimal","keterangan1":"","rtp":"Koordinasi melalui rapat, bimtek dan kunjungan lapangan","rencanaWaktuRtp":"TW 1- 4","realisasiRtp":"TW 1- 4","tanggalRtp":"TW 1- 4","bukti":"","keterangan2":""},{"group":"Risiko Operasional ","no":9,"risiko":"Penyusunan laporan terlambat","kode":"ROO. 26.13.16.09","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Realisasi terhambat","dampak":"Realisasi terhambat","keterangan1":"","rtp":"Koordinasi melalui rapat, bimtek dan kunjungan lapangan","rencanaWaktuRtp":"TW 1- 4","realisasiRtp":"TW 1- 4","tanggalRtp":"TW 1- 4","bukti":"","keterangan2":""},{"group":"Risiko Operasional ","no":10,"risiko":"Fasilitasi Pelaksanaan Profile Desa Dan Kelurahan bagi Pemerintah Desa /Kelurahan yang belum melakukan Pengimputan serta Up Date Data secara berkelanjutan ","kode":"ROO. 26.13.16.10","tempat":"Desa dan kelurahan","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Desa Dan Kelurahan yang melakukan Pengimputan dan Up Date Data Pro DesKel Maih Rendah","dampak":"Ketidak sesuaian data ProDesKel/tidak validnya Data sesuai kebutuhan perencanaan","keterangan1":"","rtp":"Pelaksaan pemutahiran Validasi data dan persamaan presepsi pengimputan status desa","rencanaWaktuRtp":"TW 1","realisasiRtp":"TW 1","tanggalRtp":"27 Februari dan 02 Maret","bukti":"pelaporan dan Dokumentasi","keterangan2":"Telah dilaksanakan"},{"group":"Risiko Operasional ","no":11,"risiko":"Fasilitasi penetapan dan penegasan tapal batas bagi Pemerintah Desa yang sudah dilakukan tidak berkelanjutan","kode":"ROO. 26.13.16.11","tempat":"Desa ","tanggalTerjadi":"Januari s.d Desember 2026","sebab":"Biaya pendampingan Program ILLASPP di Kab. Toli-Toli dan Kab. Donggala","dampak":"Proses penetapan PERBUB  penegasan batas desa di 2 Kabupaten","keterangan1":"","rtp":"Konsultasi dan Koordinasi  singketa batas desa dan validasi  Data dasar terkait peta dan titik koordinat ","rencanaWaktuRtp":"TW 2","realisasiRtp":"TW 2","tanggalRtp":"06 dan 11 Mei ","bukti":"pelaporan dan Dokumentasi","keterangan2":"Telah dilaksanakan"},{"group":"Risiko Operasional ","no":12,"risiko":"Pemanfataan bantuan sarana prasarana oleh LKD dan masyarakat tidak optimal","kode":"ROO. 26.13.16.12","tempat":"Desa dan kelurahan","tanggalTerjadi":"","sebab":"Perlunya pemahaman staf DPRD Provinsi Sulawesi Tengah dalam melakukan penginputan pokir","dampak":"Bantuan sarana dan prasarana  tidak dimanfaatkan maksimal oleh LKD kepada masyarakat","keterangan1":"","rtp":"Peningkatan monitoring dan evaluasi","rencanaWaktuRtp":"","realisasiRtp":"","tanggalRtp":"","bukti":"","keterangan2":""},{"group":"Risiko Operasional ","no":13,"risiko":"Sasaran masyarakat miskin untuk pengembangan kewirausahaan dalam unit BUM Desa belum terakomodir secara optimal","kode":"ROO. 26.13.16.13","tempat":"Kec. Lore Selatan Kab. Poso","tanggalTerjadi":"07 April  2026","sebab":"Pemerintah Desa belum memahami peran BUM Desa dalam penanggulangan kemiskinan","dampak":"Upaya menurunkan tingkat kemiskinan di desa belum terlaksana secara optimal","keterangan1":"","rtp":"Pembinaan dan Pendampingan Penguatan peran BUM Desa dalam penanggulangan kemiskinan ","rencanaWaktuRtp":"TW 2","realisasiRtp":"April 2026","tanggalRtp":"April 2026","bukti":"","keterangan2":"Koordinasi telah dilaksanakan,  dokumen form pengisian tersedia"},{"group":"Risiko Operasional ","no":14,"risiko":"Kompetensi narasumber dan pelatih mempengaruhi hasil penyerapan ilmu dan keterampilan tentang pengembangan BUM Desa","kode":"ROO. 26.13.16.14","tempat":"Desa Avolua Kec. Parigi Utara Kab. Parigi Moutong","tanggalTerjadi":"13 Mei 2026","sebab":"Pemilihan narasumber dan pelatih yang kurang selektif","dampak":"Usaha BUM Desa tidak berkembang karena pemahaman dan keterampilan pengurus dan pengelola unit usaha Bum Desa tidak meningkat","keterangan1":"","rtp":"Pelatihan/Bimtek Manajemen Perencanaan Bisnis BUM Desa","rencanaWaktuRtp":"TW 1 dan 2","realisasiRtp":"Mei 2026","tanggalRtp":"Mei 2026","bukti":"","keterangan2":"Koordinasi telah dilaksanakan"},{"group":"Risiko Operasional ","no":15,"risiko":"Hasil usaha gagal karena Perencanaan Bisnis yang kurang matang pada pemilihan unit usaha yang tidak didasari kemampuan teknis pengelolaan usaha dan topografi wilayah desa","kode":"ROO. 26.13.16.15","tempat":"Desa Pangi Kec. Parigi Utara Kab. Parigi Moutong","tanggalTerjadi":"12 Mei 2026","sebab":"Kemampuan Pengurus BUM Desa dan Unit Usaha BUM Desa dalam perencanaan BUM Desa masih rendah","dampak":"Usaha BUM Desa tidak berkembang karena  Pengurus dan pengelola unit usaha  BUM Desa tidak memiliki kemampuan teknis pengelolaan usaha","keterangan1":"","rtp":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","rencanaWaktuRtp":"TW 1 dan 2","realisasiRtp":"Mei 2026","tanggalRtp":"Mei 2026","bukti":"","keterangan2":"Koordinasi dan Pendampingan belum dilaksanakan"},{"group":"Risiko Operasional ","no":16,"risiko":"Jumlah target dan lokasi desa percontohan pelaksanaan kegiatan tidak sesuai dengan rencana kerja awal yang sudah ditetapkan","kode":"ROO. 26.13.16.16","tempat":"Provinsi","tanggalTerjadi":"Januari 2026","sebab":"Penerapan efisiensi anggaran","dampak":"Peningkatan peran BUM Desa dalam meningkatkan perekonomian desa di lokasi desa percontohan tidak maksimal","keterangan1":"","rtp":"Pelatihan/Bimtek Pengembangan Pengelolaan Usaha BUM Desa ","rencanaWaktuRtp":"TW 1 ","realisasiRtp":"Januari 2026","tanggalRtp":"Januari 2026","bukti":"Dokumen tersedia ","keterangan2":"Dokumen tersedia dan telah didisitribusikan"},{"group":"Risiko Operasional ","no":17,"risiko":"Rencana aksi program kegiatan yang sudah dirumuskan harus dilakukan perubahan menyesuaikan ketersediaan anggaran","kode":"ROO. 26.13.16.17","tempat":"Provinsi","tanggalTerjadi":"Januari 2026","sebab":"Penerapan efisiensi anggaran","dampak":"Peningkatan peran BUM Desa dalam meningkatkan perekonomian desa di lokasi desa percontohan tidak maksimal","keterangan1":"","rtp":"Peningkatan peran BUM Desa dalam meningkatkan perekonomian desa di lokasi desa percontohan tidak maksimal","rencanaWaktuRtp":"TW 1 ","realisasiRtp":"Mei 2026","tanggalRtp":"Mei 2026","bukti":"Dokumen tersedia ","keterangan2":"Dokumen tersedia "}]}};
+/* ================= KONFIGURASI FORM ================= */
+// Setiap form mendefinisikan: header fields (info umum, tidak berulang),
+// dan record fields (baris data berulang), lengkap dengan teks bantuan
+// yang diambil dari "Keterangan" pada sheet aslinya.
+
+const HEADER_COMMON = [
+  {key:'namaPemda', label:'Nama Pemda', help:'Nama pemerintah daerah'},
+  {key:'namaOpd', label:'Nama OPD', help:'OPD yang dinilai risikonya'},
+  {key:'tahun', label:'Tahun Penilaian', help:'Tahun pelaksanaan penilaian risiko'},
+  {key:'periode', label:'Periode yang Dinilai', help:'Periode/jangka waktu yang dinilai'},
+  {key:'urusan', label:'Urusan Pemerintahan', help:'Urusan pemerintahan OPD'},
+  {key:'opd', label:'OPD yang Dinilai', help:'Nama lengkap OPD yang dinilai'},
+  {key:'tujuanStrategis', label:'Tujuan Strategis', help:'Tujuan strategis OPD sesuai RPJMD/Renstra'},
+];
+
+const FORMS = {
+
+  form2b: {
+    code:'2.b', title:'Konteks Strategis OPD', desc:'Penetapan konteks risiko strategis: tujuan, sasaran, dan IKU Renstra OPD yang dinilai risikonya.',
+    group:'Konteks Risiko',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda', help:'Kolom diisi nama pemerintah daerah'},
+      {key:'tahun', label:'Tahun Penilaian', help:'Tahun pelaksanaan penilaian risiko'},
+      {key:'periode', label:'Periode yang Dinilai', help:'mis. Periode RPJMD 2025-2029'},
+      {key:'urusan', label:'Urusan Pemerintahan', help:'Urusan wajib/pilihan sesuai OPD'},
+      {key:'opd', label:'OPD yang Dinilai', help:'Nama lengkap OPD'},
+      {key:'sumberData', label:'Sumber Data', help:'Dokumen sumber, mis. Rancangan Akhir Renstra', type:'textarea'},
+      {key:'tujuanStrategis', label:'Tujuan Strategis', help:'Tujuan strategis OPD sesuai RPJMD/Renstra', type:'textarea'},
+      {key:'tujuanDinilai', label:'Tujuan/Sasaran/IKU yang Dinilai Risikonya', help:'Uraian ruang lingkup penilaian risiko strategis', type:'textarea', full:true},
+    ],
+    lists: [
+      {key:'sasaranStrategis', label:'Sasaran Strategis', itemLabel:'Sasaran', simple:true},
+      {key:'iku', label:'IKU Renstra OPD', itemLabel:'Indikator Kinerja Utama', fields:[
+        {key:'no', label:'No', w:1}, {key:'uraian', label:'Uraian IKU', w:4},
+        {key:'target', label:'Target 2026', w:2}, {key:'satuan', label:'Satuan', w:1},
+      ]},
+      {key:'sasaranDinilai', label:'Sasaran Strategis yang Dinilai', itemLabel:'Sasaran', simple:true},
+      {key:'ikuDinilai', label:'IKU yang Dinilai', itemLabel:'Indikator Kinerja Utama', fields:[
+        {key:'no', label:'No', w:1}, {key:'uraian', label:'Uraian IKU', w:4},
+        {key:'target', label:'Target 2026', w:2}, {key:'satuan', label:'Satuan', w:1},
+      ]},
+    ],
+    signature: true,
+  },
+
+  form2c: {
+    code:'2.c', title:'Konteks Operasional OPD', desc:'Penetapan konteks risiko operasional: program, kegiatan, sub kegiatan beserta indikator keluaran dan target.',
+    group:'Konteks Risiko',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda', help:'Kolom diisi nama pemerintah daerah'},
+      {key:'tahun', label:'Tahun Penilaian', help:'Tahun pelaksanaan penilaian risiko'},
+      {key:'periode', label:'Periode yang Dinilai', help:'mis. 1 tahun'},
+      {key:'urusan', label:'Urusan Pemerintahan', help:'Urusan wajib/pilihan sesuai OPD'},
+      {key:'opd', label:'OPD yang Dinilai', help:'Nama lengkap OPD'},
+      {key:'sumberData', label:'Sumber Data', help:'Dokumen sumber, mis. Renja OPD', type:'textarea'},
+      {key:'tujuanStrategis', label:'Tujuan Strategis', help:'Tujuan strategis OPD terkait', type:'textarea'},
+    ],
+    programTree: true,
+    lists: [
+      {key:'kegiatanIndikator', label:'Kegiatan dan Indikator Keluaran yang Dinilai Risikonya', itemLabel:'Kegiatan', fields:[
+        {key:'kegiatan', label:'Kegiatan', w:4}, {key:'indikator', label:'Indikator Keluaran', w:4}, {key:'target', label:'Target', w:1},
+      ]},
+    ],
+    signature: true,
+  },
+
+  form3b: {
+    code:'3.b', title:'Identifikasi Risiko Strategis', desc:'Identifikasi peristiwa risiko atas tujuan/sasaran strategis OPD: sebab, sumber, dan dampaknya.',
+    group:'Identifikasi Risiko',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda'}, {key:'namaOpd', label:'Nama OPD'},
+      {key:'tahun', label:'Tahun Penilaian'}, {key:'periode', label:'Periode yang Dinilai'},
+      {key:'tujuanStrategis', label:'Tujuan Strategis', type:'textarea', full:true},
+      {key:'urusan', label:'Urusan Pemerintahan'}, {key:'opd', label:'OPD yang Dinilai'},
+    ],
+    records: {
+      key:'records', itemLabel:'Risiko Strategis',
+      titleField: r => r.risiko || '(risiko belum diisi)',
+      metaField: r => [r.kode, r.pemilik].filter(Boolean).join(' · '),
+      fields:[
+        {key:'no', label:'a — No', help:'Nomor urut', w:1},
+        {key:'tujuanSasaran', label:'b — Tujuan/Sasaran Strategis', help:'Tujuan strategis urusan wajib sebagaimana tercantum dalam RPJMD/Renstra', type:'textarea', w:3},
+        {key:'indikator', label:'c — Indikator Kinerja', help:'Indikator kinerja tujuan strategis', type:'textarea', w:2},
+        {key:'risiko', label:'d — Uraian Risiko', help:'Uraian peristiwa yang merupakan risiko', type:'textarea', full:true},
+        {key:'kode', label:'e — Kode Risiko', help:'Kode risiko, mis. RSO.xx.xx.xx.xx', w:2},
+        {key:'pemilik', label:'f — Pemilik Risiko', help:'Pihak/unit yang bertanggung jawab mengelola risiko', w:2},
+        {key:'sebab', label:'g — Uraian Sebab', help:'Penyebab timbulnya risiko (Man/Money/Method/Machine/Material)', type:'textarea', full:true},
+        {key:'sumber', label:'h — Sumber', help:'Sumber risiko: eksternal / internal', w:2},
+        {key:'cuc', label:'i — C / UC', help:'C = unit kerja mampu mengendalikan penyebab; UC = tidak mampu', w:1},
+        {key:'dampak', label:'j — Uraian Dampak', help:'Akibat jika risiko terjadi (Keuangan/Kinerja/Reputasi/Hukum)', type:'textarea', full:true},
+        {key:'pihakTerkena', label:'k — Pihak yang Terkena Dampak', help:'Pihak/unit yang menderita dampak', type:'textarea', full:true},
+      ]
+    }
+  },
+
+  form3c: {
+    code:'3.c', title:'Identifikasi Risiko Operasional', desc:'Identifikasi risiko pada tiap tahapan sub kegiatan (perencanaan, penganggaran, pelaksanaan, pelaporan).',
+    group:'Identifikasi Risiko',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda'}, {key:'namaOpd', label:'Nama OPD'},
+      {key:'tahun', label:'Tahun Penilaian'}, {key:'periode', label:'Periode yang Dinilai'},
+      {key:'tujuanStrategis', label:'Tujuan Strategis', type:'textarea'},
+      {key:'sasaranStrategis', label:'Sasaran Strategis OPD'},
+      {key:'urusan', label:'Urusan Pemerintahan'}, {key:'opd', label:'OPD yang Dinilai'},
+    ],
+    records: {
+      key:'records', itemLabel:'Risiko Operasional', groupField:'program', groupLabel:'Program',
+      titleField: r => r.risiko || '(risiko belum diisi)',
+      metaField: r => [r.kode, r.tahap].filter(Boolean).join(' · '),
+      fields:[
+        {key:'no', label:'a — No', help:'Nomor urut', w:1},
+        {key:'subKegiatan', label:'b — Sub Kegiatan', help:'Kegiatan, tujuan, sasaran sebagaimana tercantum dalam RKA SKPD', type:'textarea', w:3},
+        {key:'indikator', label:'c — Indikator Keluaran', help:'Indikator kinerja tujuan/sasaran kegiatan', type:'textarea', w:2},
+        {key:'tahap', label:'d — Tahap', help:'Tahapan kegiatan: Perencanaan/Penganggaran/Pelaksanaan/Pelaporan', w:2},
+        {key:'risiko', label:'e — Uraian Risiko', help:'Uraian peristiwa yang merupakan risiko', type:'textarea', full:true},
+        {key:'kode', label:'f — Kode Risiko', help:'Kode risiko, mis. ROO xx.xx.xx.xx', w:2},
+        {key:'pemilik', label:'g — Pemilik Risiko', help:'Pihak/unit penanggung jawab risiko', w:2},
+        {key:'sebab', label:'h — Uraian Sebab', help:'Penyebab timbulnya risiko', type:'textarea', full:true},
+        {key:'sumber', label:'i — Sumber', help:'Sumber risiko: eksternal / internal', w:1},
+        {key:'cuc', label:'j — C / UC', help:'C = dapat dikendalikan unit kerja; UC = tidak dapat', w:1},
+        {key:'dampak', label:'k — Uraian Dampak', help:'Akibat yang ditimbulkan jika risiko terjadi', type:'textarea', full:true},
+        {key:'pihakTerkena', label:'l — Pihak yang Terkena Dampak', help:'Pihak/unit yang menderita dampak', type:'textarea', full:true},
+      ]
+    }
+  },
+
+  matriks: {
+    code:'6', title:'Matriks Analisis Risiko', desc:'Peta posisi setiap kode risiko berdasarkan skala dampak dan kemungkinan — dihitung otomatis dari Form 4 (Hasil Analisis Risiko). Tidak perlu diisi manual.', auto:'matrix'
+  },
+
+  form4fgd: {
+    code:'4a', title:'FGD Analisis Risiko', desc:'Kertas kerja penilaian skala Dampak (D) dan Kemungkinan (K) oleh setiap peserta FGD untuk tiap risiko.', auto:'fgd'
+  },
+
+  form4hasil: {
+    code:'4', title:'Hasil Analisis Risiko', desc:'Rekap skala dampak, skala kemungkinan, dan skala risiko (hasil rata-rata/modus penilaian FGD) untuk tiap risiko yang teridentifikasi.',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda'}, {key:'tahun', label:'Tahun Penilaian'},
+      {key:'tujuanStrategis', label:'Tujuan Strategis OPD', type:'textarea'}, {key:'urusan', label:'Urusan Pemerintahan'},
+    ],
+    records: {
+      key:'records', itemLabel:'Hasil Analisis', groupField:'group', groupLabel:'Kelompok Risiko',
+      titleField: r => r.risiko || '(risiko belum diisi)',
+      metaField: r => [r.kode, 'Skala '+ (r.skala||'-')].filter(Boolean).join(' · '),
+      fields:[
+        {key:'no', label:'a — No', help:'Nomor urut', w:1},
+        {key:'risiko', label:'b — Risiko yang Teridentifikasi', help:'Sesuai Form 3.b / 3.c', type:'textarea', full:true},
+        {key:'kode', label:'c — Kode Risiko', help:'Kode risiko sesuai Form 3.b / 3.c', w:2},
+        {key:'dampak', label:'d — Skala Dampak', help:'Rata-rata/modus skala dampak (1-5) hasil FGD', type:'number', w:1},
+        {key:'kemungkinan', label:'e — Skala Kemungkinan', help:'Rata-rata/modus skala kemungkinan (1-5) hasil FGD', type:'number', w:1},
+        {key:'skala', label:'f — Skala Risiko', help:'Hasil analisis dampak × kemungkinan (skala 1-25)', type:'number', w:1},
+      ]
+    }
+  },
+
+  form5: {
+    code:'5', title:'Daftar Risiko Prioritas', desc:'Daftar risiko dengan skala risiko tertinggi yang menjadi prioritas penanganan.',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda'}, {key:'tahun', label:'Tahun Penilaian'},
+      {key:'tujuanStrategis', label:'Tujuan Strategis', type:'textarea'}, {key:'urusan', label:'Urusan Pemerintahan'},
+    ],
+    records: {
+      key:'records', itemLabel:'Risiko Prioritas', groupField:'group', groupLabel:'Kelompok Risiko',
+      titleField: r => r.risiko || '(risiko belum diisi)',
+      metaField: r => [r.kode, 'Skala '+(r.skala||'-')].filter(Boolean).join(' · '),
+      fields:[
+        {key:'no', label:'a — No', w:1},
+        {key:'risiko', label:'b — Risiko Prioritas', help:'Uraian risiko prioritas', type:'textarea', full:true},
+        {key:'kode', label:'c — Kode Risiko', w:2},
+        {key:'skala', label:'d — Skala Risiko', help:'Sesuai Form 4 (Hasil Analisis Risiko)', type:'number', w:1},
+        {key:'pemilik', label:'e — Pemilik Risiko', help:'Sesuai Form 3.b / 3.c', w:2},
+        {key:'penyebab', label:'f — Penyebab', help:'Sesuai Form 3.b / 3.c', type:'textarea', full:true},
+        {key:'dampak', label:'g — Dampak', help:'Sesuai Form 3.b / 3.c', type:'textarea', full:true},
+      ]
+    }
+  },
+
+  form7: {
+    code:'7', title:'Penilaian Kegiatan Pengendalian', desc:'Menilai pengendalian yang sudah ada, celah pengendalian, dan rencana tindak pengendalian (RTP) untuk tiap risiko prioritas.',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda'}, {key:'tahun', label:'Tahun Penilaian'},
+      {key:'tujuanStrategis', label:'Tujuan Strategis', type:'textarea'}, {key:'urusan', label:'Urusan Pemerintahan'},
+    ],
+    records: {
+      key:'records', itemLabel:'Penilaian Pengendalian', groupField:'group', groupLabel:'Kelompok Risiko',
+      titleField: r => r.risiko || '(risiko belum diisi)',
+      metaField: r => r.kode || '',
+      fields:[
+        {key:'no', label:'a — No', w:1},
+        {key:'risiko', label:'b — Risiko Prioritas', type:'textarea', full:true},
+        {key:'kode', label:'c — Kode Risiko', w:2},
+        {key:'pengendalianAda', label:'d — Pengendalian yang Sudah Ada', help:'Uraian pengendalian yang sudah ada/terpasang, jangan hanya nama SOP', type:'textarea', full:true},
+        {key:'celah', label:'e — Celah Pengendalian', help:'Alasan pengendalian belum efektif menangani risiko', type:'textarea', full:true},
+        {key:'rtp', label:'f — Rencana Tindak Pengendalian', help:'Pengendalian yang masih dibutuhkan', type:'textarea', full:true},
+        {key:'pj', label:'g — Pemilik/Penanggung Jawab', help:'Pihak/unit penanggung jawab pengendalian', w:2},
+        {key:'targetWaktu', label:'h — Target Waktu Penyelesaian', w:2},
+      ]
+    }
+  },
+
+  form8: {
+    code:'8', title:'Pengkomunikasian Pengendalian', desc:'Rencana pengkomunikasian kegiatan pengendalian yang dibutuhkan kepada pihak terkait.',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda'}, {key:'tahun', label:'Tahun Penilaian'},
+      {key:'tujuanStrategis', label:'Tujuan Strategis', type:'textarea'}, {key:'urusan', label:'Urusan Pemerintahan'},
+    ],
+    records: {
+      key:'records', itemLabel:'Rencana Komunikasi', groupField:'group', groupLabel:'Kelompok Risiko',
+      titleField: r => r.kegiatanPengendalian || '(kegiatan belum diisi)',
+      metaField: r => r.media || '',
+      fields:[
+        {key:'no', label:'a — No', w:1},
+        {key:'kegiatanPengendalian', label:'b — Kegiatan Pengendalian yang Dibutuhkan', type:'textarea', full:true},
+        {key:'media', label:'c — Media/Bentuk Sarana Pengkomunikasian', type:'textarea', w:2},
+        {key:'penyedia', label:'d — Penyedia Informasi', w:2},
+        {key:'penerima', label:'e — Penerima Informasi', type:'textarea', w:2},
+        {key:'rencanaWaktu', label:'f — Rencana Waktu Pelaksanaan', w:1},
+        {key:'realisasiWaktu', label:'g — Realisasi Waktu Pelaksanaan', w:1},
+        {key:'keterangan', label:'h — Keterangan', type:'textarea', full:true},
+      ]
+    }
+  },
+
+  form9: {
+    code:'9', title:'Rencana Monitoring Pengendalian Intern', desc:'Rancangan pemantauan atas pengendalian intern yang dibangun: metode, penanggung jawab, dan waktu pelaksanaan.',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda'}, {key:'tahun', label:'Tahun Penilaian'}, {key:'urusan', label:'Urusan Pemerintahan'},
+    ],
+    records: {
+      key:'records', itemLabel:'Rencana Pemantauan', groupField:'group', groupLabel:'Kelompok Risiko',
+      titleField: r => r.kegiatanPengendalian || '(kegiatan belum diisi)',
+      metaField: r => r.bentukPemantauan || '',
+      fields:[
+        {key:'no', label:'a — No', w:1},
+        {key:'kegiatanPengendalian', label:'b — Kegiatan Pengendalian yang Dibutuhkan', type:'textarea', full:true},
+        {key:'bentukPemantauan', label:'c — Bentuk/Metode Pemantauan yang Diperlukan', type:'textarea', w:2},
+        {key:'pj', label:'d — Penanggung Jawab Pemantauan', w:2},
+        {key:'rencanaWaktu', label:'e — Rencana Waktu Pelaksanaan Pemantauan', w:1},
+        {key:'realisasiWaktu', label:'f — Realisasi Waktu Pelaksanaan', w:1},
+        {key:'keterangan', label:'g — Keterangan', type:'textarea', full:true},
+      ]
+    }
+  },
+
+  form10: {
+    code:'10', title:'Pencatatan Kejadian Risiko & RTP', desc:'Mencatat kejadian risiko (risk event) yang benar-benar terjadi pada tahun berjalan beserta realisasi RTP-nya.',
+    header: [
+      {key:'namaPemda', label:'Nama Pemda'}, {key:'tahun', label:'Tahun Penilaian'}, {key:'urusan', label:'Urusan Pemerintahan'},
+    ],
+    records: {
+      key:'records', itemLabel:'Kejadian Risiko', groupField:'group', groupLabel:'Kelompok Risiko',
+      titleField: r => r.risiko || '(risiko belum diisi)',
+      metaField: r => r.kode || '',
+      fields:[
+        {key:'no', label:'a — No', w:1},
+        {key:'risiko', label:'b — Risiko yang Teridentifikasi', type:'textarea', full:true},
+        {key:'kode', label:'c — Kode Risiko', w:2},
+        {key:'tempat', label:'d — Tempat Kejadian', help:'Tempat terjadinya risiko pada tahun berjalan', w:2},
+        {key:'tanggalTerjadi', label:'e — Tanggal Terjadi', w:2},
+        {key:'sebab', label:'f — Sebab', help:'Penyebab peristiwa risiko saat terjadi', type:'textarea', full:true},
+        {key:'dampak', label:'g — Dampak', help:'Dampak peristiwa risiko yang terjadi', type:'textarea', full:true},
+        {key:'keterangan1', label:'h — Keterangan', type:'textarea', w:2},
+        {key:'rtp', label:'i — RTP', help:'Rencana tindak pengendalian', type:'textarea', full:true},
+        {key:'rencanaWaktuRtp', label:'j — Rencana Pelaksanaan RTP', w:2},
+        {key:'realisasiRtp', label:'k — Realisasi Pelaksanaan RTP', w:2},
+        {key:'tanggalRtp', label:'l — Tanggal Pelaksanaan RTP', w:2},
+        {key:'bukti', label:'m — Bukti Realisasi Pelaksanaan RTP', type:'textarea', w:2},
+        {key:'keterangan2', label:'n — Keterangan', type:'textarea', w:2},
+      ]
+    }
+  },
+};
+
+const MENU_ORDER = ['home','form2b','form2c','form3b','form3c','form4fgd','form4hasil','matriks','form5','form7','form8','form9','form10'];
+const MENU_GROUPS = [
+  {title:'Ringkasan', items:['home']},
+  {title:'Konteks Risiko', items:['form2b','form2c']},
+  {title:'Identifikasi Risiko', items:['form3b','form3c']},
+  {title:'Analisis Risiko', items:['form4fgd','form4hasil','matriks']},
+  {title:'Evaluasi & Prioritas', items:['form5']},
+  {title:'Penanganan Risiko', items:['form7','form8','form9']},
+  {title:'Pemantauan', items:['form10']},
+];
+
+/* ================= STATE & PENYIMPANAN ================= */
+const STORAGE_KEY = 'kk-manrisk-dpmd-sulteng-2026';
+let DATA = null;
+let currentForm = 'home';
+let saveTimer = null;
+
+function deepClone(o){ return JSON.parse(JSON.stringify(o)); }
+
+async function loadData(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, false);
+    if(res && res.value){ DATA = JSON.parse(res.value); return; }
+  }catch(e){ /* belum ada data tersimpan */ }
+  DATA = deepClone(RAW_DATA);
+  await persist();
+}
+
+async function persist(){
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(DATA), false);
+    flashSaved();
+  }catch(e){ console.error('Gagal menyimpan', e); }
+}
+
+function scheduleSave(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(persist, 500);
+}
+
+function flashSaved(){
+  const el = document.getElementById('savePill');
+  el.classList.add('show');
+  clearTimeout(flashSaved._t);
+  flashSaved._t = setTimeout(()=>el.classList.remove('show'), 1400);
+}
+
+/* ================= UTIL ================= */
+function el(tag, attrs={}, children=[]){
+  const e = document.createElement(tag);
+  for(const k in attrs){
+    if(k==='class') e.className = attrs[k];
+    else if(k==='html') e.innerHTML = attrs[k];
+    else if(k.startsWith('on')) e.addEventListener(k.slice(2), attrs[k]);
+    else e.setAttribute(k, attrs[k]);
+  }
+  (Array.isArray(children)?children:[children]).forEach(c=>{
+    if(c===null||c===undefined) return;
+    e.appendChild(typeof c==='string'? document.createTextNode(c) : c);
+  });
+  return e;
+}
+
+function fieldInput(obj, key, opt={}){
+  const type = opt.type || 'text';
+  const wrap = el('div', {class:'field'+(opt.full?' full':'')});
+  wrap.appendChild(el('label',{}, opt.label||key));
+  let input;
+  if(type==='textarea'){
+    input = el('textarea', {rows: opt.rows||2});
+    input.value = obj[key] ?? '';
+  } else if(type==='number'){
+    input = el('input', {type:'number'});
+    input.value = obj[key] ?? '';
+  } else {
+    input = el('input', {type:'text'});
+    input.value = obj[key] ?? '';
+  }
+  input.addEventListener('input', ()=>{
+    obj[key] = type==='number' ? (input.value===''? '' : Number(input.value)) : input.value;
+    scheduleSave();
+    opt.onInput && opt.onInput();
+  });
+  wrap.appendChild(input);
+  if(opt.help) wrap.appendChild(el('div',{class:'help'}, opt.help));
+  return wrap;
+}
+
+function levelOf(skala){
+  const s = Number(skala)||0;
+  if(s<=9) return 'rendah';
+  if(s<=19) return 'sedang';
+  return 'tinggi';
+}
+function badge(skala){
+  const lvl = levelOf(skala);
+  const txt = lvl==='rendah'?'Rendah':lvl==='sedang'?'Sedang':'Tinggi';
+  return el('span',{class:'badge badge-'+lvl}, txt);
+}
+
+/* ================= RENDER: MENU ================= */
+function renderMenu(){
+  const menu = document.getElementById('menu');
+  menu.innerHTML = '';
+  MENU_GROUPS.forEach(grp=>{
+    menu.appendChild(el('div',{class:'menu-group-title'}, grp.title));
+    const g = el('div',{class:'menu-group'});
+    grp.items.forEach(key=>{
+      const meta = key==='home' ? {code:'—', title:'Beranda'} : FORMS[key];
+      const btn = el('button', {class:'menu-item'+(currentForm===key?' active':''), onclick:()=>{ currentForm=key; render(); }},
+        [ el('span',{class:'code'}, meta.code), el('span',{}, meta.title) ]);
+      g.appendChild(btn);
+    });
+    menu.appendChild(g);
+  });
+}
+
+/* ================= RENDER: HOME ================= */
+function countRecords(key){
+  const f = FORMS[key];
+  if(!f || !f.records) return null;
+  return (DATA[key] && DATA[key][f.records.key]) ? DATA[key][f.records.key].length : 0;
+}
+
+function renderHome(container){
+  const info = DATA.form2b || {};
+  const hero = el('div',{class:'hero'},[
+    el('div',{class:'eyebrow'}, 'Kertas Kerja Manajemen Risiko · Tahun ' + (info.tahun||'2026')),
+    el('h2',{}, info.opd || 'Dinas Pemberdayaan Masyarakat dan Desa Provinsi Sulawesi Tengah'),
+    el('p',{}, (info.tujuanStrategis||'') ),
+  ]);
+  const totalRisiko = (countRecords('form3b')||0) + (countRecords('form3c')||0);
+  const totalPrioritas = countRecords('form5')||0;
+  const totalRtp = countRecords('form7')||0;
+  const stats = el('div',{class:'stat-row'},[
+    statBox(totalRisiko,'Risiko Teridentifikasi'),
+    statBox(totalPrioritas,'Risiko Prioritas'),
+    statBox(totalRtp,'Rencana Tindak Pengendalian'),
+    statBox(countRecords('form10')||0,'Kejadian Risiko Tercatat'),
+  ]);
+  hero.appendChild(stats);
+  container.appendChild(hero);
+
+  const panel = el('div',{class:'panel'});
+  panel.appendChild(el('h3',{},'Alur Kertas Kerja'));
+  panel.appendChild(el('div',{class:'desc'},'Klik salah satu tahapan untuk mulai mengisi atau meninjau data. Setiap pertanyaan pada formulir ini mengikuti persis kolom dan keterangan pada Kertas Kerja Manajemen Risiko 2026 Dinas PMD Provinsi Sulawesi Tengah.'));
+  const grid = el('div',{class:'grid-cards'});
+  MENU_ORDER.filter(k=>k!=='home').forEach(key=>{
+    const f = FORMS[key];
+    const n = countRecords(key);
+    const card = el('button',{class:'nav-card', onclick:()=>{currentForm=key; render();}},[
+      el('div',{class:'code'},'Form '+f.code),
+      el('div',{class:'t'}, f.title),
+      el('div',{class:'d'}, f.desc),
+      n!==null ? el('div',{class:'n'}, n+' data tersimpan') : el('div',{class:'n'},'Otomatis dari form lain'),
+    ]);
+    grid.appendChild(card);
+  });
+  panel.appendChild(grid);
+  container.appendChild(panel);
+}
+function statBox(n,l){ return el('div',{class:'stat'},[el('div',{class:'n'},String(n)), el('div',{class:'l'},l)]); }
+
+/* ================= RENDER: HEADER INFO PANEL ================= */
+function renderHeaderPanel(container, formKey, meta){
+  const panel = el('div',{class:'panel'});
+  panel.appendChild(el('h3',{},'Informasi Umum'));
+  panel.appendChild(el('div',{class:'desc'},'Data identitas OPD dan konteks penilaian — mengisi bagian kepala formulir Form ' + meta.code + '.'));
+  const grid = el('div',{class:'info-grid'});
+  meta.header.forEach(f=>{
+    grid.appendChild(fieldInput(DATA[formKey], f.key, {label:f.label, help:f.help, type:f.type, full:f.full}));
+  });
+  panel.appendChild(grid);
+  container.appendChild(panel);
+}
+
+/* ================= RENDER: SIMPLE LISTS (form2b/2c) ================= */
+function renderLists(container, formKey, meta){
+  meta.lists.forEach(listMeta=>{
+    const panel = el('div',{class:'panel'});
+    panel.appendChild(el('h3',{}, listMeta.label));
+    const arr = DATA[formKey][listMeta.key];
+    const wrap = el('div',{class:'record-list'});
+    if(listMeta.simple){
+      arr.forEach((val,i)=>{
+        const row = el('div',{class:'record-fields', style:'grid-template-columns:1fr auto;align-items:center;margin-bottom:8px;'});
+        const ta = el('textarea',{rows:1});
+        ta.value = val;
+        ta.addEventListener('input', ()=>{ arr[i]=ta.value; scheduleSave(); });
+        row.appendChild(ta);
+        row.appendChild(el('button',{class:'btn btn-sm btn-danger', onclick:()=>{ arr.splice(i,1); scheduleSave(); render(); }},'Hapus'));
+        wrap.appendChild(row);
+      });
+      panel.appendChild(wrap);
+      panel.appendChild(el('div',{class:'add-row'}, el('button',{class:'btn btn-sm', onclick:()=>{ arr.push(''); scheduleSave(); render(); }}, '+ Tambah '+listMeta.itemLabel)));
+    } else {
+      arr.forEach((item,i)=>{
+        const card = el('div',{class:'record-card', open:''});
+        card.setAttribute('open','');
+        const summary = el('summary',{},[
+          el('span',{class:'idx'}, String(i+1)),
+          el('span',{class:'sum'},[ el('div',{class:'title'}, item.uraian || listMeta.itemLabel) ]),
+        ]);
+        const body = el('div',{class:'body'});
+        const fgrid = el('div',{class:'record-fields'});
+        listMeta.fields.forEach(f=>{
+          fgrid.appendChild(fieldInput(item, f.key, {label:f.label, help:f.help, type:f.type}));
+        });
+        body.appendChild(fgrid);
+        const actions = el('div',{class:'record-actions'});
+        actions.appendChild(el('button',{class:'btn btn-sm btn-danger', onclick:(e)=>{ e.preventDefault(); arr.splice(i,1); scheduleSave(); render(); }}, 'Hapus'));
+        body.appendChild(actions);
+        card.appendChild(summary); card.appendChild(body);
+        wrap.appendChild(card);
+      });
+      panel.appendChild(wrap);
+      panel.appendChild(el('div',{class:'add-row'}, el('button',{class:'btn btn-sm', onclick:()=>{ arr.push({}); scheduleSave(); render(); }}, '+ Tambah '+listMeta.itemLabel)));
+    }
+    container.appendChild(panel);
+  });
+}
+
+function renderProgramTree(container, formKey){
+  const panel = el('div',{class:'panel'});
+  panel.appendChild(el('h3',{},'Program, Kegiatan, dan Sub Kegiatan'));
+  panel.appendChild(el('div',{class:'desc'},'Struktur program/kegiatan/sub kegiatan Renstra OPD tahun berjalan.'));
+  const arr = DATA[formKey].programKegiatan;
+  const wrap = el('div',{class:'record-list'});
+  arr.forEach((item,i)=>{
+    const row = el('div',{class:'record-fields', style:'grid-template-columns:110px 1fr 1fr auto;align-items:start;margin-bottom:6px;'});
+    const sel = el('select',{});
+    ['program','kegiatan','sub'].forEach(v=>{
+      const o = el('option',{value:v}, v==='program'?'Program':v==='kegiatan'?'Kegiatan':'Sub Kegiatan');
+      if(item.level===v) o.setAttribute('selected','');
+      sel.appendChild(o);
+    });
+    sel.addEventListener('change', ()=>{ item.level=sel.value; scheduleSave(); });
+    row.appendChild(sel);
+    const t1 = el('textarea',{rows:1, placeholder:'Program'}); t1.value = item.program||'';
+    t1.addEventListener('input', ()=>{ item.program=t1.value; scheduleSave(); });
+    const t2 = el('textarea',{rows:1, placeholder:'Kegiatan / Sub Kegiatan'}); t2.value = item.kegiatan || item.sub || '';
+    t2.addEventListener('input', ()=>{ if(item.level==='program') item.kegiatan=t2.value; else item.sub=t2.value; scheduleSave(); });
+    row.appendChild(t1); row.appendChild(t2);
+    row.appendChild(el('button',{class:'btn btn-sm btn-danger', onclick:()=>{ arr.splice(i,1); scheduleSave(); render(); }},'Hapus'));
+    wrap.appendChild(row);
+  });
+  panel.appendChild(wrap);
+  panel.appendChild(el('div',{class:'add-row'}, el('button',{class:'btn btn-sm', onclick:()=>{ arr.push({level:'program',program:'',kegiatan:'',sub:''}); scheduleSave(); render(); }}, '+ Tambah Baris')));
+  container.appendChild(panel);
+}
+
+/* ================= RENDER: RECORD FORM (generik) ================= */
+function renderRecords(container, formKey, meta){
+  const rmeta = meta.records;
+  const panel = el('div',{class:'panel'});
+  panel.appendChild(el('h3',{}, rmeta.itemLabel + ' — Daftar Data'));
+  panel.appendChild(el('div',{class:'desc'},'Setiap kartu mewakili satu baris data pada Form '+meta.code+'. Klik untuk membuka dan mengisi jawaban tiap kolom.'));
+
+  const arr = DATA[formKey][rmeta.key];
+  const wrap = el('div',{class:'record-list'});
+
+  if(arr.length===0){
+    wrap.appendChild(el('div',{class:'empty-state'}, 'Belum ada data. Klik "Tambah data" untuk mulai mengisi.'));
+  }
+
+  let lastGroup = undefined;
+  arr.forEach((rec,i)=>{
+    if(rmeta.groupField && rec[rmeta.groupField]!==lastGroup){
+      lastGroup = rec[rmeta.groupField];
+      wrap.appendChild(el('div',{class:'group-heading'}, lastGroup || '(Tanpa kelompok)'));
+    }
+    wrap.appendChild(renderRecordCard(rec, i, arr, rmeta));
+  });
+
+  panel.appendChild(wrap);
+  const addBtn = el('button',{class:'btn btn-sm btn-primary', onclick:()=>{
+    const blank = {};
+    rmeta.fields.forEach(f=>blank[f.key]='');
+    if(rmeta.groupField) blank[rmeta.groupField] = lastGroup || '';
+    blank.no = arr.length + 1;
+    arr.push(blank); scheduleSave(); render();
+  }}, '+ Tambah data '+rmeta.itemLabel);
+  panel.appendChild(el('div',{class:'add-row'}, addBtn));
+  container.appendChild(panel);
+}
+
+function renderRecordCard(rec, i, arr, rmeta){
+  const card = el('details',{class:'record-card'});
+  const summary = el('summary',{},[
+    el('span',{class:'idx'}, String(rec.no || i+1)),
+    el('span',{class:'sum'},[
+      el('div',{class:'title'}, truncate(rmeta.titleField(rec), 110)),
+      el('div',{class:'meta'}, rmeta.metaField ? rmeta.metaField(rec) : ''),
+    ]),
+    el('span',{class:'chev'}, '▶'),
+  ]);
+  const body = el('div',{class:'body'});
+  const fgrid = el('div',{class:'record-fields'});
+  rmeta.fields.forEach(f=>{
+    fgrid.appendChild(fieldInput(rec, f.key, {label:f.label, help:f.help, type:f.type, full: f.full || (f.w && f.w>=3), onInput: ()=>{
+      summary.querySelector('.title').textContent = truncate(rmeta.titleField(rec),110);
+      if(rmeta.metaField) summary.querySelector('.meta').textContent = rmeta.metaField(rec);
+    }}));
+  });
+  body.appendChild(fgrid);
+  const actions = el('div',{class:'record-actions'});
+  actions.appendChild(el('button',{class:'btn btn-sm btn-danger', onclick:(e)=>{ e.preventDefault(); arr.splice(i,1); scheduleSave(); render(); }}, 'Hapus data ini'));
+  body.appendChild(actions);
+  card.appendChild(summary); card.appendChild(body);
+  return card;
+}
+
+function truncate(s,n){ s = s||''; return s.length>n? s.slice(0,n-1)+'…' : s; }
+
+/* ================= RENDER: FORM 4 FGD ================= */
+function renderFgd(container){
+  const fgd = DATA.form4fgd;
+  const panel = el('div',{class:'panel'});
+  panel.appendChild(el('h3',{},'Peserta FGD'));
+  panel.appendChild(el('div',{class:'desc'}, fgd.judul || ''));
+  const listWrap = el('div',{class:'record-list'});
+  fgd.peserta.forEach((p,i)=>{
+    const row = el('div',{class:'record-fields', style:'grid-template-columns:60px 2fr 1.4fr auto;align-items:center;margin-bottom:6px;'});
+    const noI = el('input',{type:'text'}); noI.value = p.no; noI.addEventListener('input',()=>{p.no=noI.value; scheduleSave();});
+    const namaI = el('input',{type:'text', placeholder:'Nama peserta'}); namaI.value = p.nama; namaI.addEventListener('input',()=>{p.nama=namaI.value; scheduleSave(); renderFgdTable();});
+    const unitI = el('input',{type:'text', placeholder:'Asal unit kerja'}); unitI.value = p.unit; unitI.addEventListener('input',()=>{p.unit=unitI.value; scheduleSave();});
+    row.appendChild(noI); row.appendChild(namaI); row.appendChild(unitI);
+    row.appendChild(el('button',{class:'btn btn-sm btn-danger', onclick:()=>{ fgd.peserta.splice(i,1); scheduleSave(); render(); }},'Hapus'));
+    listWrap.appendChild(row);
+  });
+  panel.appendChild(listWrap);
+  panel.appendChild(el('div',{class:'add-row'}, el('button',{class:'btn btn-sm', onclick:()=>{
+    fgd.peserta.push({no:fgd.peserta.length+1, nama:'', unit:'', scores:{}});
+    scheduleSave(); render();
+  }}, '+ Tambah peserta')));
+  container.appendChild(panel);
+
+  const panel2 = el('div',{class:'panel'});
+  panel2.appendChild(el('h3',{},'Penilaian Dampak (D) dan Kemungkinan (K) per Risiko'));
+  panel2.appendChild(el('div',{class:'desc'},'Isi skala 1–5 untuk tiap risiko menurut penilaian masing-masing peserta. Nilai rata-rata dihitung otomatis dan menjadi acuan pengisian Form 4 (Hasil Analisis Risiko).'));
+  const tableWrap = el('div',{class:'fgd-table-wrap', id:'fgdTableWrap'});
+  panel2.appendChild(tableWrap);
+  container.appendChild(panel2);
+  renderFgdTable();
+}
+
+function renderFgdTable(){
+  const wrap = document.getElementById('fgdTableWrap');
+  if(!wrap) return;
+  wrap.innerHTML='';
+  const fgd = DATA.form4fgd;
+  const riskKeys = Object.keys(fgd.risknames);
+  const table = el('table',{class:'fgd'});
+  const thead1 = el('tr',{}, [el('th',{}, 'Peserta'), ...riskKeys.map(k=>el('th',{colspan:'2'}, k))]);
+  const thead2 = el('tr',{}, [el('th',{}, fgd.judul? '' : ''), ...riskKeys.map(()=>[el('th',{},'D'), el('th',{},'K')]).flat()]);
+  table.appendChild(thead1); table.appendChild(thead2);
+
+  fgd.peserta.forEach(p=>{
+    const tr = el('tr',{});
+    tr.appendChild(el('td',{class:'name-col'}, (p.nama||'—') + (p.unit? ' · '+p.unit : '')));
+    riskKeys.forEach(k=>{
+      if(!p.scores[k]) p.scores[k]={D:'',K:''};
+      ['D','K'].forEach(dk=>{
+        const td = el('td',{});
+        const inp = el('input',{type:'number', min:'1', max:'5'});
+        inp.value = p.scores[k][dk] ?? '';
+        inp.addEventListener('input', ()=>{ p.scores[k][dk] = inp.value===''?'':Number(inp.value); scheduleSave(); updateFgdAverages(); });
+        td.appendChild(inp);
+        tr.appendChild(td);
+      });
+    });
+    table.appendChild(tr);
+  });
+
+  const trTotal = el('tr',{class:'avg', id:'fgdTotalRow'});
+  const trAvg = el('tr',{class:'avg', id:'fgdAvgRow'});
+  table.appendChild(trTotal); table.appendChild(trAvg);
+  wrap.appendChild(table);
+  updateFgdAverages();
+}
+
+function updateFgdAverages(){
+  const fgd = DATA.form4fgd;
+  const riskKeys = Object.keys(fgd.risknames);
+  const totalRow = document.getElementById('fgdTotalRow');
+  const avgRow = document.getElementById('fgdAvgRow');
+  if(!totalRow) return;
+  totalRow.innerHTML=''; avgRow.innerHTML='';
+  totalRow.appendChild(el('td',{}, 'Jumlah'));
+  avgRow.appendChild(el('td',{}, 'Rata-rata'));
+  riskKeys.forEach(k=>{
+    ['D','K'].forEach(dk=>{
+      let sum=0,n=0;
+      fgd.peserta.forEach(p=>{ const v=p.scores[k] && p.scores[k][dk]; if(v!==''&&v!==undefined&&v!==null){sum+=Number(v);n++;} });
+      totalRow.appendChild(el('td',{}, n? String(sum): '-'));
+      avgRow.appendChild(el('td',{}, n? (sum/n).toFixed(1): '-'));
+    });
+  });
+}
+
+/* ================= RENDER: MATRIKS RISIKO (otomatis) ================= */
+function renderMatriks(container){
+  const panel = el('div',{class:'panel'});
+  panel.appendChild(el('h3',{},'Matriks Analisis Risiko'));
+  panel.appendChild(el('div',{class:'desc'}, FORMS.matriks.desc));
+
+  const records = (DATA.form4hasil && DATA.form4hasil.records) || [];
+  const grid = {};
+  records.forEach(r=>{
+    const d = Number(r.dampak), k = Number(r.kemungkinan);
+    if(!d || !k) return;
+    const key = k+'-'+d;
+    (grid[key] = grid[key]||[]).push({kode:r.kode||'(tanpa kode)', skala:r.skala});
+  });
+
+  const dampakLabels = ['Tidak signifikan','Kurang Signifikan','Sedang','Signifikan','Sangat signifikan'];
+  const kemungkinanLabels = ['Sangat jarang','Kemungkinan kecil','Kadang-kadang','Kemungkinan besar','Hampir pasti'];
+
+  const table = el('table',{class:'matrix'});
+  const head = el('tr',{}, [el('th',{},''), ...dampakLabels.map((l,i)=>el('th',{}, (i+1)+' · '+l))]);
+  table.appendChild(head);
+  for(let k=5;k>=1;k--){
+    const tr = el('tr',{});
+    tr.appendChild(el('td',{class:'axis'}, k+' · '+kemungkinanLabels[k-1]));
+    for(let d=1; d<=5; d++){
+      const items = grid[k+'-'+d] || [];
+      const lvl = items.length? levelOf(items[0].skala || (d*k)) : '';
+      const td = el('td',{class:'cell'+(lvl?' lvl-'+lvl:'')});
+      items.forEach(it=> td.appendChild(el('span',{class:'chip'}, it.kode)));
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
+  const matrixWrap = el('div',{class:'matrix-wrap'}, table);
+  panel.appendChild(matrixWrap);
+
+  const legend = el('div',{style:'margin-top:14px;display:flex;gap:16px;flex-wrap:wrap;'},[
+    el('span',{},[badge(5),' Rendah — risiko dapat diterima']),
+    el('span',{},[badge(15),' Sedang/Tinggi — perlu penanganan lanjutan']),
+    el('span',{},[badge(25),' Sangat Tinggi — penanganan prioritas']),
+  ]);
+  panel.appendChild(legend);
+  container.appendChild(panel);
+
+  const kpanel = el('div',{class:'panel'});
+  kpanel.appendChild(el('h3',{},'Kriteria Penilaian (acuan pengisian Form 4)'));
+  const kgrid = el('div',{class:'kriteria-grid'});
+  const t1 = el('table',{class:'kriteria'});
+  t1.appendChild(el('tr',{},[el('th',{},'Nilai'),el('th',{},'Kriteria Kemungkinan')]));
+  [[1,'Sangat Jarang'],[2,'Jarang'],[3,'Kadang-Kadang'],[4,'Sering'],[5,'Sangat Sering']].forEach(r=>{
+    t1.appendChild(el('tr',{},[el('td',{},String(r[0])),el('td',{},r[1])]));
+  });
+  const t2 = el('table',{class:'kriteria'});
+  t2.appendChild(el('tr',{},[el('th',{},'Nilai'),el('th',{},'Kriteria Dampak')]));
+  [[1,'Tidak Signifikan'],[2,'Kurang Signifikan'],[3,'Sedang'],[4,'Signifikan'],[5,'Sangat Signifikan']].forEach(r=>{
+    t2.appendChild(el('tr',{},[el('td',{},String(r[0])),el('td',{},r[1])]));
+  });
+  kgrid.appendChild(t1); kgrid.appendChild(t2);
+  kpanel.appendChild(kgrid);
+  container.appendChild(kpanel);
+}
+
+/* ================= SIGNATURE BLOCK ================= */
+function renderSignature(container, formKey){
+  const panel = el('div',{class:'panel'});
+  panel.appendChild(el('h3',{},'Penandatangan'));
+  const grid = el('div',{class:'info-grid'});
+  const d = DATA[formKey];
+  const map = formKey==='form2b'
+    ? [['ttdTempatTanggal','Tempat, Tanggal'],['ttdNama','Nama'],['ttdPangkat','Pangkat/Golongan'],['ttdNip','NIP']]
+    : [['ttdTempatTanggal','Tempat, Tanggal'],['ttdJabatan','Jabatan'],['ttdNama','Nama'],['ttdPangkat','Pangkat/Golongan'],['ttdNip','NIP']];
+  map.forEach(([k,l])=> grid.appendChild(fieldInput(d,k,{label:l, type:'textarea'})));
+  panel.appendChild(grid);
+  container.appendChild(panel);
+}
+
+/* ================= MAIN RENDER ================= */
+function render(){
+  renderMenu();
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+  const crumb = document.getElementById('crumb');
+  const title = document.getElementById('pageTitle');
+
+  if(currentForm==='home'){
+    crumb.textContent = 'Ringkasan';
+    title.textContent = 'Beranda';
+    renderHome(content);
+    return;
+  }
+
+  const meta = FORMS[currentForm];
+  crumb.textContent = 'Form ' + meta.code;
+  title.textContent = meta.title;
+
+  if(meta.auto==='matrix'){ renderMatriks(content); return; }
+  if(meta.auto==='fgd'){ renderFgd(content); return; }
+
+  if(meta.header) renderHeaderPanel(content, currentForm, meta);
+  if(meta.programTree) renderProgramTree(content, currentForm);
+  if(meta.lists) renderLists(content, currentForm, meta);
+  if(meta.records) renderRecords(content, currentForm, meta);
+  if(meta.signature) renderSignature(content, currentForm);
+}
+
+/* ================= EKSPOR EXCEL ================= */
+function buildSheetForForm(key, meta){
+  const rows = [];
+  rows.push(['Form '+meta.code+' — '+meta.title]);
+  rows.push([]);
+  if(meta.header){
+    meta.header.forEach(f=>{ rows.push([f.label, DATA[key][f.key]||'']); });
+    rows.push([]);
+  }
+  if(meta.lists){
+    meta.lists.forEach(lm=>{
+      rows.push([lm.label]);
+      const arr = DATA[key][lm.key];
+      if(lm.simple){
+        arr.forEach((v,i)=> rows.push([i+1, v]));
+      } else {
+        rows.push(lm.fields.map(f=>f.label));
+        arr.forEach(item=> rows.push(lm.fields.map(f=>item[f.key]||'')));
+      }
+      rows.push([]);
+    });
+  }
+  if(meta.programTree){
+    rows.push(['Program / Kegiatan / Sub Kegiatan']);
+    DATA[key].programKegiatan.forEach(it=>{
+      rows.push([it.level, it.program||'', it.kegiatan||'', it.sub||'']);
+    });
+    rows.push([]);
+  }
+  if(meta.records){
+    const rmeta = meta.records;
+    const headers = rmeta.fields.map(f=>f.label);
+    if(rmeta.groupField) headers.unshift(rmeta.groupLabel);
+    rows.push(headers);
+    DATA[key][rmeta.key].forEach(rec=>{
+      const line = rmeta.fields.map(f=> rec[f.key] ?? '');
+      if(rmeta.groupField) line.unshift(rec[rmeta.groupField]||'');
+      rows.push(line);
+    });
+  }
+  return XLSX.utils.aoa_to_sheet(rows);
+}
+
+function buildFgdSheet(){
+  const fgd = DATA.form4fgd;
+  const riskKeys = Object.keys(fgd.risknames);
+  const rows = [];
+  rows.push(['Form 4 — Kertas Kerja FGD Analisis Risiko']);
+  rows.push([fgd.judul||'']);
+  rows.push([]);
+  const head1 = ['No','Nama Peserta','Asal Unit'];
+  riskKeys.forEach(k=>{ head1.push(k); head1.push(''); });
+  rows.push(head1);
+  const head2 = ['','',''];
+  riskKeys.forEach(()=>{ head2.push('D'); head2.push('K'); });
+  rows.push(head2);
+  const head3 = ['','',''];
+  riskKeys.forEach(k=>{ head3.push(fgd.risknames[k]); head3.push(''); });
+  rows.push(head3);
+  fgd.peserta.forEach(p=>{
+    const line = [p.no, p.nama, p.unit];
+    riskKeys.forEach(k=>{
+      const s = p.scores[k]||{};
+      line.push(s.D ?? ''); line.push(s.K ?? '');
+    });
+    rows.push(line);
+  });
+  return XLSX.utils.aoa_to_sheet(rows);
+}
+
+function buildMatriksSheet(){
+  const rows = [['Matriks Analisis Risiko (dihitung otomatis dari Form 4)']];
+  rows.push([]);
+  rows.push(['Kemungkinan \\ Dampak','1 - Tidak Signifikan','2 - Kurang Signifikan','3 - Sedang','4 - Signifikan','5 - Sangat Signifikan']);
+  const records = (DATA.form4hasil && DATA.form4hasil.records) || [];
+  const grid = {};
+  records.forEach(r=>{
+    const d=Number(r.dampak), k=Number(r.kemungkinan);
+    if(!d||!k) return;
+    const key=k+'-'+d;
+    (grid[key]=grid[key]||[]).push(r.kode||'');
+  });
+  const kLabels = ['1 - Sangat jarang','2 - Kemungkinan kecil','3 - Kadang-kadang','4 - Kemungkinan besar','5 - Hampir pasti'];
+  for(let k=5;k>=1;k--){
+    const row = [kLabels[k-1]];
+    for(let d=1; d<=5; d++){ row.push((grid[k+'-'+d]||[]).join(', ')); }
+    rows.push(row);
+  }
+  return XLSX.utils.aoa_to_sheet(rows);
+}
+
+function exportExcel(){
+  const wb = XLSX.utils.book_new();
+  MENU_ORDER.filter(k=>k!=='home').forEach(key=>{
+    const meta = FORMS[key];
+    let ws;
+    if(meta.auto==='fgd') ws = buildFgdSheet();
+    else if(meta.auto==='matrix') ws = buildMatriksSheet();
+    else ws = buildSheetForForm(key, meta);
+    const sheetName = ('Form '+meta.code+' '+meta.title).slice(0,31).replace(/[\\\/\?\*\[\]:]/g,'-');
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+  });
+  const opdName = (DATA.form2b && DATA.form2b.opd) || 'OPD';
+  const fname = 'Kertas Kerja Manajemen Risiko 2026 - '+opdName+'.xlsx';
+  XLSX.writeFile(wb, fname);
+}
+
+/* ================= IMPOR EXCEL ================= */
+function importExcel(file){
+  const reader = new FileReader();
+  reader.onload = (e)=>{
+    try{
+      const wb = XLSX.read(new Uint8Array(e.target.result), {type:'array'});
+      MENU_ORDER.filter(k=>k!=='home').forEach(key=>{
+        const meta = FORMS[key];
+        const sheetName = ('Form '+meta.code+' '+meta.title).slice(0,31).replace(/[\\\/\?\*\[\]:]/g,'-');
+        const ws = wb.Sheets[sheetName];
+        if(!ws) return;
+        const aoa = XLSX.utils.sheet_to_json(ws, {header:1, blankrows:true, defval:''});
+        importSheetIntoForm(key, meta, aoa);
+      });
+      scheduleSave();
+      render();
+      alert('Impor data dari Excel berhasil.');
+    }catch(err){
+      console.error(err);
+      alert('Gagal membaca file Excel. Pastikan file berasal dari hasil ekspor aplikasi ini.');
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function importSheetIntoForm(key, meta, aoa){
+  if(meta.auto==='fgd' || meta.auto==='matrix') return; // dua sheet ini otomatis, tidak diimpor manual
+  let r = 2; // baris 0: judul, 1: kosong
+  if(meta.header){
+    meta.header.forEach(f=>{
+      const row = aoa[r]; if(row) DATA[key][f.key] = row[1] ?? '';
+      r++;
+    });
+    r++; // baris kosong
+  }
+  if(meta.lists){
+    meta.lists.forEach(lm=>{
+      r++; // judul list
+      const arr = [];
+      if(lm.simple){
+        while(aoa[r] && aoa[r].length && aoa[r][0]!==''){
+          arr.push(aoa[r][1] ?? '');
+          r++;
+        }
+      } else {
+        r++; // header kolom
+        while(aoa[r] && aoa[r].some(c=>c!=='')){
+          const item = {};
+          lm.fields.forEach((f,i)=> item[f.key] = aoa[r][i] ?? '');
+          arr.push(item);
+          r++;
+        }
+      }
+      DATA[key][lm.key] = arr;
+      r++; // baris kosong
+    });
+  }
+  if(meta.programTree){
+    r++; // judul
+    const arr = [];
+    while(aoa[r] && aoa[r].some(c=>c!=='')){
+      arr.push({level:aoa[r][0]||'program', program:aoa[r][1]||'', kegiatan:aoa[r][2]||'', sub:aoa[r][3]||''});
+      r++;
+    }
+    DATA[key].programKegiatan = arr;
+    r++;
+  }
+  if(meta.records){
+    const rmeta = meta.records;
+    r++; // header row
+    const arr = [];
+    const offset = rmeta.groupField ? 1 : 0;
+    for(let i=r;i<aoa.length;i++){
+      const row = aoa[i];
+      if(!row || !row.some(c=>c!=='')) continue;
+      const item = {};
+      if(rmeta.groupField) item[rmeta.groupField] = row[0]||'';
+      rmeta.fields.forEach((f,idx)=>{ item[f.key] = row[idx+offset] ?? ''; });
+      arr.push(item);
+    }
+    DATA[key][rmeta.key] = arr;
+  }
+}
+
+/* ================= INIT ================= */
+async function init(){
+  await loadData();
+  render();
+  document.getElementById('btnExport').addEventListener('click', exportExcel);
+  document.getElementById('btnReset').addEventListener('click', async ()=>{
+    if(confirm('Muat ulang ke data awal Kertas Kerja Manajemen Risiko 2026? Perubahan yang belum diekspor akan hilang.')){
+      DATA = deepClone(RAW_DATA);
+      await persist();
+      render();
+    }
+  });
+  document.getElementById('fileImport').addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(file) importExcel(file);
+    e.target.value='';
+  });
+}
+init();
+</script>
+</body>
+</html>
