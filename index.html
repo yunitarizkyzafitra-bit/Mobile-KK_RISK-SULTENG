@@ -3,374 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kertas Kerja Manajemen Risiko - Dinas PMD Provinsi Sulawesi Tengah</title>
-    <!-- SheetJS for Google Spreadsheet Integration -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <title>Kertas Kerja Manajemen Risiko — Provinsi Sulawesi Tengah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sidebar-bg: #0f172a;
-            --sidebar-hover: #1e293b;
-            --primary-accent: #0ea5e9;
-            --main-bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
+            --bg-app: #090d16;
+            --sidebar-bg: #0e1626;
+            --sidebar-border: rgba(255, 255, 255, 0.06);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #38bdf8;
+            --primary-gradient: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --transition: all 0.25s ease;
         }
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            margin: 0;
-            background-color: var(--main-bg);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-app);
             color: var(--text-main);
             display: flex;
             height: 100vh;
             overflow: hidden;
         }
-
-        /* Sidebar Styling */
-        aside {
-            width: 280px;
-            background-color: var(--sidebar-bg);
-            color: #94a3b8;
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid #1e293b;
-            overflow-y: auto;
-        }
-        .brand-box {
-            padding: 24px 20px;
-            background: #090d16;
-            border-bottom: 1px solid #1e293b;
-        }
-        .brand-box span {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: var(--primary-accent);
-            font-weight: 700;
-        }
-        .brand-box h1 {
-            margin: 6px 0 0 0;
-            font-size: 16px;
-            color: #ffffff;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-        .brand-box p {
-            margin: 6px 0 0 0;
-            font-size: 11px;
-            color: #94a3b8;
-        }
         
-        .nav-section {
-            padding: 16px 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .nav-section-title {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #64748b;
-            padding: 0 10px 8px 10px;
-            font-weight: 700;
-        }
-        .nav-item {
+        /* LOGIN OVERLAY SCREEN */
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, #090d16 0%, #111c33 100%);
             display: flex;
+            justify-content: center;
             align-items: center;
-            padding: 10px 12px;
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 2px;
+            z-index: 9999;
         }
-        .nav-item:hover {
-            background-color: var(--sidebar-hover);
-            color: #ffffff;
+        .login-card {
+            background: rgba(14, 22, 38, 0.85);
+            border: 1px solid var(--card-border);
+            padding: 40px;
+            border-radius: 16px;
+            width: 380px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            text-align: center;
+            backdrop-filter: blur(12px);
         }
-        .nav-item.active {
-            background-color: var(--primary-accent);
-            color: #ffffff;
-            font-weight: 600;
+        .login-card img.logo {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            object-fit: contain;
         }
-        .nav-item .code {
-            font-weight: 700;
-            margin-right: 10px;
-            font-family: monospace;
-            background: rgba(255,255,255,0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 11px;
-        }
-
-        /* Main Content Area */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        header.top-header {
-            background: var(--card-bg);
-            padding: 16px 32px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header.top-header h2 {
-            margin: 0;
+        .login-card h2 {
             font-size: 18px;
             font-weight: 700;
-            color: var(--text-main);
+            color: #ffffff;
+            margin-bottom: 6px;
         }
-        header.top-header p {
-            margin: 2px 0 0 0;
+        .login-card p {
             font-size: 12px;
             color: var(--text-muted);
-        }
-        .header-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .btn {
-            background: var(--primary-accent);
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: opacity 0.2s;
-        }
-        .btn:hover { opacity: 0.9; }
-        .btn-secondary { background: #475569; }
-        .btn-success { background: #10b981; }
-
-        .content-body {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-            background-color: var(--main-bg);
-        }
-
-        .info-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 24px;
             margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-        .info-card h3 { margin: 0 0 6px 0; font-size: 14px; font-weight: 700; color: var(--text-main); }
-        .info-card p { margin: 0 0 20px 0; font-size: 12px; color: var(--text-muted); }
-        
-        .form-grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
         }
         .form-group {
             margin-bottom: 16px;
+            text-align: left;
+            position: relative;
         }
         .form-group label {
             display: block;
             font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 600;
             color: var(--text-muted);
             margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
         .form-group input {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 13px;
-            color: var(--text-main);
-            background: #fff;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 14px;
             outline: none;
+            transition: var(--transition);
+        }
+        .form-group input:focus {
+            border-color: var(--primary);
+            background: rgba(56, 189, 248, 0.05);
+        }
+        .toggle-pin {
+            position: absolute;
+            right: 14px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-gradient);
+            color: #090d16;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 8px;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+        }
+        .login-error {
+            color: #f87171;
+            font-size: 12px;
+            margin-top: 12px;
+            display: none;
         }
 
-        /* Spreadsheet Table Editor */
-        .table-responsive {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            overflow: auto;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        /* MAIN APP LAYOUT */
+        #app-container {
+            display: none;
+            width: 100vw;
+            height: 100vh;
         }
-        table.sheet-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            white-space: nowrap;
-        }
-        table.sheet-table th, table.sheet-table td {
-            border: 1px solid var(--border-color);
-            padding: 10px 12px;
-            text-align: left;
-        }
-        table.sheet-table th {
-            background: #f1f5f9;
-            color: #334155;
-            font-weight: 700;
-            position: sticky;
-            top: 0;
+        aside {
+            width: 300px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--sidebar-border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
             z-index: 10;
         }
-        table.sheet-table td input {
-            width: 100%;
-            border: none;
-            background: transparent;
-            font-size: 12px;
-            outline: none;
-            color: var(--text-main);
+        .brand-box {
+            padding: 24px 20px;
+            background: linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, transparent 100%);
+            border-bottom: 1px solid var(--sidebar-border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
-        table.sheet-table td input:focus {
-            background: #e0f2fe;
-            padding: 4px;
-            border-radius: 3px;
+        .brand-box img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
         }
-        .status-pill {
-            font-size: 11px;
-            background: #d1fae5;
-            color: #065f46;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-weight: 600;
+        .brand-info h1 { font-size: 13px; color: #ffffff; font-weight: 700; line-height: 1.3; }
+        .brand-info p { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        
+        .nav-category {
+            padding: 18px 16px 6px 16px; font-size: 10px; text-transform: uppercase;
+            letter-spacing: 1.2px; color: #64748b; font-weight: 700;
+        }
+        .nav-item {
+            display: flex; align-items: center; padding: 10px 16px; color: var(--text-muted);
+            text-decoration: none; font-size: 12px; border-radius: 8px; cursor: pointer;
+            transition: var(--transition); margin: 2px 12px; font-weight: 500;
+        }
+        .nav-item:hover { background-color: rgba(255, 255, 255, 0.05); color: #ffffff; }
+        .nav-item.active { background: var(--primary-gradient); color: #090d16; font-weight: 700; }
+        .nav-item .code {
+            font-weight: 700; margin-right: 10px; font-family: monospace;
+            background: rgba(0, 0, 0, 0.2); padding: 2px 6px; border-radius: 6px; font-size: 10px;
+        }
+        
+        main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: radial-gradient(circle at top right, #111c33 0%, #090d16 60%); }
+        header.top-header {
+            padding: 18px 32px; background: rgba(14, 22, 38, 0.7); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--sidebar-border); display: flex; justify-content: space-between; align-items: center;
+        }
+        header.top-header h2 { font-size: 18px; font-weight: 700; color: #ffffff; }
+        header.top-header p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        .header-actions { display: flex; gap: 10px; align-items: center; }
+        .btn {
+            background: var(--primary-gradient); color: #090d16; border: none; padding: 9px 16px;
+            border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 12px; display: inline-flex; align-items: center; gap: 6px;
+            transition: var(--transition);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.06); color: #ffffff; border: 1px solid var(--card-border); }
+        .content-body { flex: 1; padding: 32px; overflow-y: auto; }
+        .table-container {
+            background: rgba(14, 22, 38, 0.6); border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        table.sheet-table { width: 100%; border-collapse: collapse; font-size: 12px; white-space: nowrap; }
+        table.sheet-table th, table.sheet-table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); border-right: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 10px 14px; text-align: left;
+        }
+        table.sheet-table th { background: rgba(20, 30, 50, 0.9); color: var(--primary); font-weight: 700; position: sticky; top: 0; z-index: 5; }
+        table.sheet-table td input { width: 100%; border: none; background: transparent; font-size: 12px; outline: none; color: #ffffff; }
+        table.sheet-table td input:focus { background: rgba(56, 189, 248, 0.1); padding: 4px 6px; border-radius: 4px; }
+        .welcome-hero {
+            background: linear-gradient(135deg, rgba(14,22,38,0.9) 0%, rgba(20,30,50,0.8) 100%);
+            border: 1px solid var(--card-border); border-radius: 14px; padding: 28px; margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR NAV -->
-    <aside>
-        <div class="brand-box">
-            <span>Manajemen Risiko 2026</span>
-            <h1>Kertas Kerja Manajemen Risiko</h1>
-            <p>Dinas PMD Provinsi Sulawesi Tengah</p>
+    <!-- SCREEN LOGIN / AUTENTIKASI -->
+    <div id="login-screen">
+        <div class="login-card">
+            <!-- Logo Resmi Provinsi Sulawesi Tengah -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Coat_of_arms_of_Central_Sulawesi.svg" alt="Logo Sulteng" class="logo">
+            <h2>Manajemen Risiko</h2>
+            <p>Provinsi Sulawesi Tengah</p>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>PIN Akses</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="pin" placeholder="Masukkan PIN" required maxlength="6">
+                        <button type="button" class="toggle-pin" onclick="togglePinVisibility()">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-login">Masuk Aplikasi</button>
+                <div id="login-error" class="login-error">Username atau PIN salah! (Default: admin / 123456)</div>
+            </form>
         </div>
+    </div>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Ringkasan</div>
-            <div class="nav-item active" onclick="switchView('dashboard', this)">
-                <span class="code">📊</span> Beranda & Statistik
+    <!-- APLIKASI UTAMA -->
+    <div id="app-container">
+        <aside>
+            <div class="brand-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Coat_of_arms_of_Central_Sulawesi.svg" alt="Logo Sulteng">
+                <div class="brand-info">
+                    <h1>Manajemen Risiko</h1>
+                    <p>Provinsi Sulawesi Tengah</p>
+                </div>
             </div>
-        </div>
+            <div class="nav-category">Utama</div>
+            <div class="nav-item active" onclick="switchView('dashboard', this)"><span class="code">📊</span> Beranda Eksekutif</div>
+            <div class="nav-category">Konteks Risiko</div>
+            <div class="nav-item" onclick="switchView('Form 2b Konteks Strategis OPD', this)"><span class="code">2.b</span> Konteks Strategis OPD</div>
+            <div class="nav-item" onclick="switchView('Form 2c Konteks Operasional OPD', this)"><span class="code">2.c</span> Konteks Operasional OPD</div>
+            <div class="nav-category">Identifikasi Risiko</div>
+            <div class="nav-item" onclick="switchView('Form 3b Risk Strategis OPD', this)"><span class="code">3.b</span> Risiko Strategis</div>
+            <div class="nav-item" onclick="switchView('Form 3c Risk Operasional OP 24', this)"><span class="code">3.c</span> Risiko Operasional</div>
+            <div class="nav-category">Analisis & Evaluasi</div>
+            <div class="nav-item" onclick="switchView('Form 4 KK hasil Analisis Risk', this)"><span class="code">4</span> Hasil Analisis Risiko</div>
+            <div class="nav-item" onclick="switchView('Matriks Risiko', this)"><span class="code">6</span> Matriks Analisis Risiko</div>
+            <div class="nav-item" onclick="switchView('Form 5 Risiko Prioritas', this)"><span class="code">5</span> Daftar Risiko Prioritas</div>
+            <div class="nav-category">Pengendalian</div>
+            <div class="nav-item" onclick="switchView('Form 7 Risk', this)"><span class="code">7</span> Penilaian Pengendalian</div>
+            <div class="nav-item" onclick="switchView('Form 8 Infokom', this)"><span class="code">8</span> Komunikasi Pengendalian</div>
+            <div class="nav-item" onclick="switchView('Form 9 Rencana Monitoring PI', this)"><span class="code">9</span> Rencana Monitoring</div>
+            <div class="nav-item" onclick="switchView('Form 10 Monitor Risk Even&RTP', this)"><span class="code">10</span> Pencatatan Kejadian</div>
+        </aside>
 
-        <div class="nav-section">
-            <div class="nav-section-title">Konteks Risiko</div>
-            <div class="nav-item" onclick="switchView('Form 2.b Konteks Strategis OPD', this)"><span class="code">2.b</span> Konteks Strategis OPD</div>
-            <div class="nav-item" onclick="switchView('Form 2.c Konteks Operasional OP', this)"><span class="code">2.c</span> Konteks Operasional OPD</div>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-section-title">Identifikasi Risiko</div>
-            <div class="nav-item" onclick="switchView('Form 3.b Identifikasi Risiko St', this)"><span class="code">3.b</span> Identifikasi Risiko Strategis</div>
-            <div class="nav-item" onclick="switchView('Form 3.c Identifikasi Risiko Op', this)"><span class="code">3.c</span> Identifikasi Risiko Operasional</div>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-section-title">Analisis Risiko</div>
-            <div class="nav-item" onclick="switchView('Form 4a FGD Analisis Risiko', this)"><span class="code">4a</span> FGD Analisis Risiko</div>
-            <div class="nav-item" onclick="switchView('Form 4 Hasil Analisis Risiko', this)"><span class="code">4</span> Hasil Analisis Risiko</div>
-            <div class="nav-item" onclick="switchView('Form 6 Matriks Analisis Risiko', this)"><span class="code">6</span> Matriks Analisis Risiko</div>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-section-title">Evaluasi & Pengendalian</div>
-            <div class="nav-item" onclick="switchView('Form 5 Daftar Risiko Prioritas', this)"><span class="code">5</span> Daftar Risiko Prioritas</div>
-            <div class="nav-item" onclick="switchView('Form 7 Penilaian Kegiatan Penge', this)"><span class="code">7</span> Penilaian Kegiatan Pengendalian</div>
-            <div class="nav-item" onclick="switchView('Form 8 Pengkomunikasian Pengend', this)"><span class="code">8</span> Pengkomunikasian Pengendalian</div>
-            <div class="nav-item" onclick="switchView('Form 9 Rencana Monitoring Penge', this)"><span class="code">9</span> Rencana Monitoring Pengendalian</div>
-            <div class="nav-item" onclick="switchView('Form 10 Pencatatan Kejadian Ris', this)"><span class="code">10</span> Pencatatan Kejadian Risiko & RTP</div>
-        </div>
-    </aside>
-
-    <!-- MAIN APP CONTENT -->
-    <main>
-        <header class="top-header">
-            <div>
-                <h2 id="view-title">Beranda Sistem Kertas Kerja</h2>
-                <p id="view-subtitle">Terhubung dengan Spreadsheet ID: 1gqnUZ_19DB0YCpFWN177axidee54pf7IiuKbH-1Cmm8</p>
-            </div>
-            <div class="header-actions">
-                <span class="status-pill" id="sync-status">✓ Sinkronisasi Aktif</span>
-                <button class="btn btn-success" onclick="fetchGoogleSheetData()">🔗 Tarik Data dari Spreadsheet</button>
-                <button class="btn btn-secondary" onclick="exportExcel()">📥 Ekspor Excel</button>
-                <button class="btn" onclick="document.getElementById('import-file').click()">📤 Impor Berkas</button>
-                <input type="file" id="import-file" style="display:none;" accept=".xlsx, .xls" onchange="importExcel(event)">
-            </div>
-        </header>
-
-        <div class="content-body" id="main-content-area"></div>
-    </main>
+        <main>
+            <header class="top-header">
+                <div>
+                    <h2 id="view-title">Beranda Eksekutif</h2>
+                    <p id="view-subtitle">Kertas Kerja Terpusat — Provinsi Sulawesi Tengah</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" onclick="loadData()">🔄 Muat Ulang</button>
+                    <button class="btn" onclick="saveData()">💾 Simpan Data</button>
+                </div>
+            </header>
+            <div class="content-body" id="main-content-area"></div>
+        </main>
+    </div>
 
     <script>
-        const sheetId = "1gqnUZ_19DB0YCpFWN177axidee54pf7IiuKbH-1Cmm8";
+        // Ganti URL Web App Google Apps Script Anda di sini
+        const API_URL = "https://script.google.com/macros/s/AKfycbzrhXHdjEvuLpbKEZq741iNDbA7TnKPLRGli2k91MoNH3xC8KRB95yDKzLwO5ESLSt9XQ/exec";
         let appData = {};
 
-        const initialRawData = {
-            "Form 2.b Konteks Strategis OPD": [["Form 2.b — Konteks Strategis OPD", "", "", ""], ["Nama Pemda", "Pemerintah Provinsi Sulawesi Tengah", "", ""]],
-            "Form 2.c Konteks Operasional OP": [["Form 2.c — Konteks Operasional OPD", "", "", ""], ["Nama Pemda", "Pemerintah Provinsi Sulawesi Tengah", "", ""]],
-            "Form 3.b Identifikasi Risiko St": [["Form 3.b — Identifikasi Risiko Strategis", "", "", "", "", "", "", "", "", "", ""]],
-            "Form 3.c Identifikasi Risiko Op": [["Form 3.c — Identifikasi Risiko Operasional", "", "", "", "", "", "", "", "", "", "", "", ""]],
-            "Form 4a FGD Analisis Risiko": [["Form 4 — Kertas Kerja FGD Analisis Risiko", "", "", "", "", "", "", "", ""]],
-            "Form 4 Hasil Analisis Risiko": [["Form 4 — Hasil Analisis Risiko", "", "", "", "", "", ""]],
-            "Form 6 Matriks Analisis Risiko": [["Matriks Analisis Risiko", "", "", "", "", ""]],
-            "Form 5 Daftar Risiko Prioritas": [["Form 5 — Daftar Risiko Prioritas", "", "", "", "", "", "", ""]],
-            "Form 7 Penilaian Kegiatan Penge": [["Form 7 — Penilaian Kegiatan Pengendalian", "", "", "", "", "", "", "", ""]],
-            "Form 8 Pengkomunikasian Pengend": [["Form 8 — Pengkomunikasian Pengendalian", "", "", "", "", "", "", "", ""]],
-            "Form 9 Rencana Monitoring Penge": [["Form 9 — Rencana Monitoring Pengendalian", "", "", "", "", "", "", ""]],
-            "Form 10 Pencatatan Kejadian Ris": [["Form 10 — Pencatatan Kejadian Risiko & RTP", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]]
-        };
-
-        function loadStorage() {
-            const saved = localStorage.getItem('risk_sulteng_' + sheetId);
-            if (saved) {
-                try { appData = JSON.parse(saved); } catch(e) { appData = JSON.parse(JSON.stringify(initialRawData)); }
+        // Autentikasi Login & Toggle PIN
+        function togglePinVisibility() {
+            const pinInput = document.getElementById('pin');
+            if (pinInput.type === 'password') {
+                pinInput.type = 'text';
             } else {
-                appData = JSON.parse(JSON.stringify(initialRawData));
+                pinInput.type = 'password';
             }
         }
 
-        function saveStorage() {
-            localStorage.setItem('risk_sulteng_' + sheetId, JSON.stringify(appData));
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value.trim();
+            const pin = document.getElementById('pin').value.trim();
+            
+            // Contoh kredensial sederhana (Dapat disesuaikan)
+            if (user === 'admin' && pin === '123456') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('app-container').style.display = 'flex';
+                loadData();
+            } else {
+                const errDiv = document.getElementById('login-error');
+                errDiv.style.display = 'block';
+            }
         }
 
-        // Fungsi menarik data langsung dari Google Spreadsheet publik via CSV export
-        async function fetchGoogleSheetData() {
-            const status = document.getElementById('sync-status');
-            status.innerText = "⏳ Sedang Menarik Data...";
-            try {
-                // Menggunakan export format CSV Google Sheets
-                const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
-                const response = await fetch(url);
-                if (!response.ok) throw new Error("Gagal mengakses spreadsheet. Pastikan spreadsheet disetel 'Anyone with the link can view'.");
-                const text = await response.text();
-                
-                // Parse CSV sederhana ke dalam sheet pertama
-                const rows = text.split('\n').map(row => row.split(',').map(cell => cell.replace(/^"|"$/g, '').trim()));
-                appData["Form 10 Pencatatan Kejadian Ris"] = rows;
-                saveStorage();
-                status.innerText = "✓ Berhasil Terhubung!";
-                switchView('Form 10 Pencatatan Kejadian Ris', document.querySelectorAll('.nav-item')[12]);
-                alert("Data Google Spreadsheet berhasil ditarik ke aplikasi!");
-            } catch (err) {
-                status.innerText = "⚠ Koneksi Offline / Menggunakan Cache";
-                alert("Catatan: " + err.message + "\nAplikasi tetap berjalan normal menggunakan penyimpanan lokal.");
-            }
+        function loadData() {
+            document.getElementById('view-subtitle').innerText = "Menghubungkan ke database server...";
+            fetch(API_URL + "?action=getData")
+                .then(response => response.json())
+                .then(data => {
+                    appData = data;
+                    document.getElementById('view-subtitle').innerText = "Data berhasil disinkronkan dari database";
+                    switchView('dashboard', document.querySelector('.nav-item'));
+                })
+                .catch(err => {
+                    // Fallback demo lokal jika URL API belum diisi
+                    appData = { "Form 2b Konteks Strategis OPD": [["Kolom 1", "Kolom 2"], ["Data Demo 1", "Data Demo 2"]] };
+                    document.getElementById('view-subtitle').innerText = "Mode Offline / Menunggu Koneksi API";
+                    switchView('dashboard', document.querySelector('.nav-item'));
+                });
+        }
+
+        function saveData() {
+            document.getElementById('view-subtitle').innerText = "Menyimpan perubahan ke Spreadsheet...";
+            fetch(API_URL, {
+                method: "POST",
+                body: new URLSearchParams({
+                    action: "saveData",
+                    data: JSON.stringify(appData)
+                })
+            })
+            .then(response => response.json())
+            .then(res => {
+                document.getElementById('view-subtitle').innerText = res.message;
+                alert(res.message);
+            })
+            .catch(err => {
+                alert("Simpan data disimulasikan / Periksa koneksi API Apps Script.");
+            });
         }
 
         function switchView(viewName, el) {
@@ -378,40 +356,27 @@
             if (el) el.classList.add('active');
 
             const titleElem = document.getElementById('view-title');
-            const subtitleElem = document.getElementById('view-subtitle');
             const container = document.getElementById('main-content-area');
 
             if (viewName === 'dashboard') {
-                titleElem.innerText = "Beranda Sistem Kertas Kerja";
-                subtitleElem.innerText = "Terhubung dengan Spreadsheet ID: " + sheetId;
+                titleElem.innerText = "Beranda Eksekutif";
                 container.innerHTML = `
-                    <div class="info-card">
-                        <h3>Informasi Koneksi Spreadsheet</h3>
-                        <p>Aplikasi ini terintegrasi langsung dengan Google Spreadsheet Anda. Klik tombol <strong>'Tarik Data dari Spreadsheet'</strong> di atas untuk sinkronisasi data secara real-time.</p>
-                        <div class="form-grid-2">
-                            <div class="form-group">
-                                <label>Google Spreadsheet ID</label>
-                                <input type="text" value="${sheetId}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>Tahun Penilaian</label>
-                                <input type="text" value="2026" readonly>
-                            </div>
-                        </div>
+                    <div class="welcome-hero">
+                        <h3>Kertas Kerja Manajemen Risiko Provinsi Sulawesi Tengah</h3>
+                        <p>Selamat datang di sistem informasi manajemen risiko terpadu. Pilih modul pada menu sebelah kiri untuk mengelola formulir analisis dan pemantauan risiko.</p>
                     </div>
                 `;
             } else {
                 titleElem.innerText = viewName;
-                subtitleElem.innerText = "Lembar Kerja Terintegrasi Aktif (Edit sel langsung di bawah ini)";
-                renderSpreadsheetEditor(viewName, container);
+                renderEditor(viewName, container);
             }
         }
 
-        function renderSpreadsheetEditor(sheetName, container) {
+        function renderEditor(sheetName, container) {
             if (!appData[sheetName]) appData[sheetName] = [["Kolom 1", "Kolom 2"]];
             const rows = appData[sheetName];
 
-            let html = '<div class="table-responsive"><table class="sheet-table"><thead><tr>';
+            let html = '<div class="table-container"><div style="overflow-x:auto;"><table class="sheet-table"><thead><tr>';
             rows[0].forEach((cell, cIdx) => {
                 html += `<th><input type="text" value="${escapeHtml(cell)}" data-row="0" data-col="${cIdx}" onchange="updateCell('${sheetName}', event)"></th>`;
             });
@@ -424,7 +389,7 @@
                 });
                 html += '</tr>';
             }
-            html += '</tbody></table></div>';
+            html += '</tbody></table></div></div>';
             container.innerHTML = html;
         }
 
@@ -434,7 +399,6 @@
             const val = e.target.value;
             if (appData[sheetName] && appData[sheetName][r]) {
                 appData[sheetName][r][c] = val;
-                saveStorage();
             }
         }
 
@@ -442,42 +406,6 @@
             if (str === null || str === undefined) return '';
             return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         }
-
-        function exportExcel() {
-            const wb = XLSX.utils.book_new();
-            Object.keys(appData).forEach(sheetName => {
-                const ws = XLSX.utils.aoa_to_sheet(appData[sheetName]);
-                XLSX.utils.book_append_sheet(wb, ws, sheetName.substring(0, 31));
-            });
-            XLSX.writeFile(wb, "Kertas_Kerja_Manajemen_Risiko_2026.xlsx");
-        }
-
-        function importExcel(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                try {
-                    const data = new Uint8Array(evt.target.result);
-                    const workbook = XLSX.read(data, {type: 'array'});
-                    let newAppData = {};
-                    workbook.SheetNames.forEach(name => {
-                        const ws = workbook.Sheets[name];
-                        newAppData[name] = XLSX.utils.sheet_to_json(ws, {header: 1, defval: ""});
-                    });
-                    appData = newAppData;
-                    saveStorage();
-                    alert("Spreadsheet berhasil diimpor!");
-                    switchView('dashboard', document.querySelector('.nav-item'));
-                } catch(err) {
-                    alert("Gagal mengimpor: " + err.message);
-                }
-            };
-            reader.readAsArrayBuffer(file);
-        }
-
-        loadStorage();
-        switchView('dashboard', document.querySelector('.nav-item'));
     </script>
 </body>
 </html>
