@@ -4,221 +4,217 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kertas Kerja Manajemen Risiko — Provinsi Sulawesi Tengah</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-app: #090d16;
-            --sidebar-bg: #0e1626;
-            --sidebar-border: rgba(255, 255, 255, 0.06);
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --primary: #38bdf8;
-            --primary-gradient: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-            --text-main: #f8fafc;
+            /* Palet Warna Profesional: Hijau, Kuning, dan Biru */
+            --app-bg: #061118;
+            --sidebar-bg: #0b1c28;
+            --sidebar-border: rgba(56, 189, 248, 0.12);
+            
+            --color-blue: #0284c7;
+            --color-blue-light: #38bdf8;
+            --color-green: #059669;
+            --color-green-light: #34d399;
+            --color-yellow: #d97706;
+            --color-yellow-light: #fbbf24;
+
+            --card-bg: rgba(11, 28, 40, 0.75);
+            --card-border: rgba(56, 189, 248, 0.15);
+            --card-hover-border: rgba(52, 211, 153, 0.4);
+            
+            --text-main: #f0fdf4;
             --text-muted: #94a3b8;
-            --transition: all 0.25s ease;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-app);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--app-bg);
             color: var(--text-main);
             display: flex;
             height: 100vh;
             overflow: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(2, 132, 199, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(5, 150, 105, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(217, 119, 6, 0.08) 0%, transparent 50%);
         }
-        
-        /* LOGIN OVERLAY SCREEN */
+
+        /* LOGIN SCREEN DESIGN */
         #login-screen {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(135deg, #090d16 0%, #111c33 100%);
+            background: linear-gradient(135deg, #040d14 0%, #0b1c28 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
         }
         .login-card {
-            background: rgba(14, 22, 38, 0.85);
+            background: rgba(11, 28, 40, 0.85);
             border: 1px solid var(--card-border);
-            padding: 40px;
-            border-radius: 16px;
-            width: 380px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            padding: 45px 40px;
+            border-radius: 20px;
+            width: 410px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(2, 132, 199, 0.1);
             text-align: center;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
         }
         .login-card img.logo {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 16px;
-            object-fit: contain;
+            width: 72px; height: 72px; margin-bottom: 18px; object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(52, 211, 153, 0.3));
         }
-        .login-card h2 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 6px;
-        }
-        .login-card p {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-        .form-group {
-            margin-bottom: 16px;
-            text-align: left;
-            position: relative;
-        }
+        .login-card h2 { font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .login-card p { font-size: 13px; color: var(--color-yellow-light); margin-bottom: 28px; font-weight: 600; }
+        
+        .form-group { margin-bottom: 18px; text-align: left; }
         .form-group label {
-            display: block;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: block; font-size: 11px; font-weight: 700; color: var(--color-blue-light);
+            margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.8px;
         }
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
         .form-group input {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 14px;
-            outline: none;
-            transition: var(--transition);
+            width: 100%; padding: 13px 16px; background: rgba(6, 17, 24, 0.6);
+            border: 1px solid var(--card-border); border-radius: 10px; color: #ffffff; font-size: 14px; outline: none; transition: var(--transition);
         }
-        .form-group input:focus {
-            border-color: var(--primary);
-            background: rgba(56, 189, 248, 0.05);
-        }
-        .toggle-pin {
-            position: absolute;
-            right: 14px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 13px;
-        }
+        .form-group input:focus { border-color: var(--color-green-light); box-shadow: 0 0 12px rgba(52, 211, 153, 0.2); }
+        .toggle-pin { position: absolute; right: 14px; background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 15px; }
+        
         .btn-login {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary-gradient);
-            color: #090d16;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 8px;
+            width: 100%; padding: 13px; background: linear-gradient(135deg, var(--color-green) 0%, var(--color-blue) 100%); color: #ffffff;
+            border: none; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; transition: var(--transition); margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
         }
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
-        }
-        .login-error {
-            color: #f87171;
-            font-size: 12px;
-            margin-top: 12px;
-            display: none;
-        }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(52, 211, 153, 0.4); }
+        .login-error { color: #f87171; font-size: 12px; margin-top: 14px; display: none; font-weight: 600; }
 
-        /* MAIN APP LAYOUT */
-        #app-container {
-            display: none;
-            width: 100vw;
-            height: 100vh;
-        }
+        /* APP LAYOUT & SIDEBAR */
+        #app-container { display: none; width: 100vw; height: 100vh; }
         aside {
-            width: 300px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--sidebar-border);
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            z-index: 10;
+            width: 310px; background-color: var(--sidebar-bg); border-right: 1px solid var(--sidebar-border);
+            display: flex; flex-direction: column; overflow-y: auto; z-index: 10;
         }
         .brand-box {
-            padding: 24px 20px;
-            background: linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, transparent 100%);
-            border-bottom: 1px solid var(--sidebar-border);
-            display: flex;
-            align-items: center;
-            gap: 14px;
+            padding: 24px 20px; background: linear-gradient(180deg, rgba(2, 132, 199, 0.12) 0%, transparent 100%);
+            border-bottom: 1px solid var(--sidebar-border); display: flex; align-items: center; gap: 14px;
         }
-        .brand-box img {
-            width: 42px;
-            height: 42px;
-            object-fit: contain;
-        }
-        .brand-info h1 { font-size: 13px; color: #ffffff; font-weight: 700; line-height: 1.3; }
-        .brand-info p { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .brand-box img { width: 44px; height: 44px; object-fit: contain; }
+        .brand-info h1 { font-size: 14px; color: #ffffff; font-weight: 800; line-height: 1.3; }
+        .brand-info p { font-size: 11px; color: var(--color-yellow-light); margin-top: 3px; font-weight: 600; }
         
         .nav-category {
-            padding: 18px 16px 6px 16px; font-size: 10px; text-transform: uppercase;
-            letter-spacing: 1.2px; color: #64748b; font-weight: 700;
+            padding: 20px 16px 8px 16px; font-size: 10px; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--color-blue-light); font-weight: 800;
         }
         .nav-item {
-            display: flex; align-items: center; padding: 10px 16px; color: var(--text-muted);
-            text-decoration: none; font-size: 12px; border-radius: 8px; cursor: pointer;
-            transition: var(--transition); margin: 2px 12px; font-weight: 500;
+            display: flex; align-items: center; padding: 11px 16px; color: var(--text-muted);
+            text-decoration: none; font-size: 12px; border-radius: 10px; cursor: pointer;
+            transition: var(--transition); margin: 3px 12px; font-weight: 600;
         }
-        .nav-item:hover { background-color: rgba(255, 255, 255, 0.05); color: #ffffff; }
-        .nav-item.active { background: var(--primary-gradient); color: #090d16; font-weight: 700; }
+        .nav-item:hover { background-color: rgba(56, 189, 248, 0.08); color: #ffffff; }
+        .nav-item.active { 
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.25) 0%, rgba(2, 132, 199, 0.25) 100%); 
+            color: var(--color-green-light); 
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            font-weight: 700; 
+        }
         .nav-item .code {
-            font-weight: 700; margin-right: 10px; font-family: monospace;
-            background: rgba(0, 0, 0, 0.2); padding: 2px 6px; border-radius: 6px; font-size: 10px;
+            font-weight: 700; margin-right: 12px; font-family: monospace;
+            background: rgba(6, 17, 24, 0.6); color: var(--color-yellow-light); padding: 3px 8px; border-radius: 6px; font-size: 11px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
         }
         
-        main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: radial-gradient(circle at top right, #111c33 0%, #090d16 60%); }
+        /* MAIN CONTENT */
+        main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: transparent; }
         header.top-header {
-            padding: 18px 32px; background: rgba(14, 22, 38, 0.7); backdrop-filter: blur(12px);
+            padding: 20px 32px; background: rgba(11, 28, 40, 0.65); backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--sidebar-border); display: flex; justify-content: space-between; align-items: center;
         }
-        header.top-header h2 { font-size: 18px; font-weight: 700; color: #ffffff; }
-        header.top-header p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        .header-actions { display: flex; gap: 10px; align-items: center; }
+        header.top-header h2 { font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; }
+        header.top-header p { font-size: 12px; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
+        
+        .header-actions { display: flex; gap: 12px; align-items: center; }
         .btn {
-            background: var(--primary-gradient); color: #090d16; border: none; padding: 9px 16px;
-            border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 12px; display: inline-flex; align-items: center; gap: 6px;
-            transition: var(--transition);
+            background: linear-gradient(135deg, var(--color-green) 0%, var(--color-blue) 100%); color: #ffffff; border: none; padding: 10px 18px;
+            border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 12px; display: inline-flex; align-items: center; gap: 8px;
+            transition: var(--transition); box-shadow: 0 4px 15px rgba(5, 150, 105, 0.25);
         }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4); }
-        .btn-secondary { background: rgba(255, 255, 255, 0.06); color: #ffffff; border: 1px solid var(--card-border); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(52, 211, 153, 0.4); }
+        .btn-secondary { background: rgba(11, 28, 40, 0.8); color: var(--color-blue-light); border: 1px solid var(--card-border); box-shadow: none; }
+        .btn-secondary:hover { background: rgba(56, 189, 248, 0.1); color: #ffffff; }
+
         .content-body { flex: 1; padding: 32px; overflow-y: auto; }
+
+        /* DASHBOARD GRID ALUR KERTAS KERJA */
+        .dashboard-hero { margin-bottom: 28px; background: linear-gradient(135deg, rgba(11, 28, 40, 0.9) 0%, rgba(6, 17, 24, 0.9) 100%); border: 1px solid var(--card-border); padding: 28px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .dashboard-hero h3 { font-size: 22px; font-weight: 800; color: #ffffff; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .dashboard-hero p { font-size: 13px; color: var(--text-muted); line-height: 1.6; max-width: 950px; }
+        
+        .workflow-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; padding-bottom: 40px;
+        }
+        .workflow-card {
+            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 22px;
+            cursor: pointer; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between;
+            position: relative; overflow: hidden; backdrop-filter: blur(10px);
+        }
+        .workflow-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--color-green-light), var(--color-blue-light));
+            opacity: 0.6; transition: var(--transition);
+        }
+        .workflow-card:hover {
+            border-color: var(--card-hover-border); background: rgba(15, 38, 55, 0.85); transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(2, 132, 199, 0.2);
+        }
+        .workflow-card:hover::before { opacity: 1; width: 6px; }
+        
+        .workflow-card .card-badge {
+            font-size: 11px; font-weight: 800; color: var(--color-yellow-light); text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 8px; display: inline-block; background: rgba(217, 119, 6, 0.15); padding: 3px 8px; border-radius: 6px;
+        }
+        .workflow-card h4 { font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+        .workflow-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 18px; }
+        
+        .workflow-card .card-footer {
+            font-size: 11px; font-weight: 700; color: var(--color-green-light); border-top: 1px solid rgba(56, 189, 248, 0.1);
+            padding-top: 12px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .workflow-card .card-footer span:last-child {
+            background: rgba(5, 150, 105, 0.15); color: var(--color-green-light); padding: 3px 8px; border-radius: 6px; font-weight: 600;
+        }
+
+        /* TABLE EDITOR DESIGN */
         .table-container {
-            background: rgba(14, 22, 38, 0.6); border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); backdrop-filter: blur(12px);
         }
         table.sheet-table { width: 100%; border-collapse: collapse; font-size: 12px; white-space: nowrap; }
         table.sheet-table th, table.sheet-table td {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); border-right: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 10px 14px; text-align: left;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.08); border-right: 1px solid rgba(56, 189, 248, 0.05);
+            padding: 12px 16px; text-align: left;
         }
-        table.sheet-table th { background: rgba(20, 30, 50, 0.9); color: var(--primary); font-weight: 700; position: sticky; top: 0; z-index: 5; }
-        table.sheet-table td input { width: 100%; border: none; background: transparent; font-size: 12px; outline: none; color: #ffffff; }
-        table.sheet-table td input:focus { background: rgba(56, 189, 248, 0.1); padding: 4px 6px; border-radius: 4px; }
-        .welcome-hero {
-            background: linear-gradient(135deg, rgba(14,22,38,0.9) 0%, rgba(20,30,50,0.8) 100%);
-            border: 1px solid var(--card-border); border-radius: 14px; padding: 28px; margin-bottom: 20px;
+        table.sheet-table th { 
+            background: linear-gradient(135deg, #0b2536 0%, #071824 100%); 
+            color: var(--color-yellow-light); font-weight: 700; position: sticky; top: 0; z-index: 5;
+            text-transform: uppercase; letter-spacing: 0.5px; font-size: 11px;
+            border-bottom: 2px solid var(--color-blue);
         }
+        table.sheet-table tbody tr { transition: var(--transition); }
+        table.sheet-table tbody tr:hover { background: rgba(56, 189, 248, 0.04); }
+        table.sheet-table td input { width: 100%; border: none; background: transparent; font-size: 12px; outline: none; color: #ffffff; font-weight: 500; }
+        table.sheet-table td input:focus { background: rgba(52, 211, 153, 0.1); padding: 6px 8px; border-radius: 6px; border: 1px solid var(--color-green-light); }
     </style>
 </head>
 <body>
 
-    <!-- SCREEN LOGIN / AUTENTIKASI -->
+    <!-- SCREEN LOGIN -->
     <div id="login-screen">
         <div class="login-card">
-            <!-- Logo Resmi Provinsi Sulawesi Tengah -->
             <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Coat_of_arms_of_Central_Sulawesi.svg" alt="Logo Sulteng" class="logo">
             <h2>Manajemen Risiko</h2>
             <p>Provinsi Sulawesi Tengah</p>
@@ -235,12 +231,12 @@
                     </div>
                 </div>
                 <button type="submit" class="btn-login">Masuk Aplikasi</button>
-                <div id="login-error" class="login-error">Username atau PIN salah! (Default: admin / 123456)</div>
+                <div id="login-error" class="login-error">Username atau PIN salah!</div>
             </form>
         </div>
     </div>
 
-    <!-- APLIKASI UTAMA -->
+    <!-- MAIN APP CONTAINER -->
     <div id="app-container">
         <aside>
             <div class="brand-box">
@@ -250,7 +246,7 @@
                     <p>Provinsi Sulawesi Tengah</p>
                 </div>
             </div>
-            <div class="nav-category">Utama</div>
+            <div class="nav-category">Navigasi Utama</div>
             <div class="nav-item active" onclick="switchView('dashboard', this)"><span class="code">📊</span> Beranda Eksekutif</div>
             <div class="nav-category">Konteks Risiko</div>
             <div class="nav-item" onclick="switchView('Form 2b Konteks Strategis OPD', this)"><span class="code">2.b</span> Konteks Strategis OPD</div>
@@ -262,7 +258,7 @@
             <div class="nav-item" onclick="switchView('Form 4 KK hasil Analisis Risk', this)"><span class="code">4</span> Hasil Analisis Risiko</div>
             <div class="nav-item" onclick="switchView('Matriks Risiko', this)"><span class="code">6</span> Matriks Analisis Risiko</div>
             <div class="nav-item" onclick="switchView('Form 5 Risiko Prioritas', this)"><span class="code">5</span> Daftar Risiko Prioritas</div>
-            <div class="nav-category">Pengendalian</div>
+            <div class="nav-category">Pengendalian & RTP</div>
             <div class="nav-item" onclick="switchView('Form 7 Risk', this)"><span class="code">7</span> Penilaian Pengendalian</div>
             <div class="nav-item" onclick="switchView('Form 8 Infokom', this)"><span class="code">8</span> Komunikasi Pengendalian</div>
             <div class="nav-item" onclick="switchView('Form 9 Rencana Monitoring PI', this)"><span class="code">9</span> Rencana Monitoring</div>
@@ -273,7 +269,7 @@
             <header class="top-header">
                 <div>
                     <h2 id="view-title">Beranda Eksekutif</h2>
-                    <p id="view-subtitle">Kertas Kerja Terpusat — Provinsi Sulawesi Tengah</p>
+                    <p id="view-subtitle">Kertas Kerja Terpusat — Dinas PMD Provinsi Sulawesi Tengah</p>
                 </div>
                 <div class="header-actions">
                     <button class="btn btn-secondary" onclick="loadData()">🔄 Muat Ulang</button>
@@ -285,34 +281,47 @@
     </div>
 
     <script>
-        // Ganti URL Web App Google Apps Script Anda di sini
         const API_URL = "https://script.google.com/macros/s/AKfycbzrhXHdjEvuLpbKEZq741iNDbA7TnKPLRGli2k91MoNH3xC8KRB95yDKzLwO5ESLSt9XQ/exec";
         let appData = {};
 
-        // Autentikasi Login & Toggle PIN
         function togglePinVisibility() {
             const pinInput = document.getElementById('pin');
-            if (pinInput.type === 'password') {
-                pinInput.type = 'text';
-            } else {
-                pinInput.type = 'password';
-            }
+            pinInput.type = pinInput.type === 'password' ? 'text' : 'password';
         }
 
         function handleLogin(e) {
             e.preventDefault();
             const user = document.getElementById('username').value.trim();
             const pin = document.getElementById('pin').value.trim();
+            const errDiv = document.getElementById('login-error');
             
-            // Contoh kredensial sederhana (Dapat disesuaikan)
-            if (user === 'admin' && pin === '123456') {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('app-container').style.display = 'flex';
-                loadData();
-            } else {
-                const errDiv = document.getElementById('login-error');
-                errDiv.style.display = 'block';
-            }
+            errDiv.style.display = 'block';
+            errDiv.innerText = "Memverifikasi kredensial...";
+
+            fetch(`${API_URL}?action=login&user=${encodeURIComponent(user)}&pin=${encodeURIComponent(pin)}`)
+                .then(response => response.json())
+                .then(res => {
+                    if (res.status === "success") {
+                        errDiv.style.display = 'none';
+                        document.getElementById('login-screen').style.display = 'none';
+                        document.getElementById('app-container').style.display = 'flex';
+                        loadData();
+                    } else {
+                        errDiv.style.display = 'block';
+                        errDiv.innerText = res.message || "Username atau PIN salah!";
+                    }
+                })
+                .catch(err => {
+                    // Fallback demo lokal
+                    if (user === 'admin' && pin === '123456') {
+                        document.getElementById('login-screen').style.display = 'none';
+                        document.getElementById('app-container').style.display = 'flex';
+                        loadData();
+                    } else {
+                        errDiv.style.display = 'block';
+                        errDiv.innerText = "Gagal terhubung ke server autentikasi!";
+                    }
+                });
         }
 
         function loadData() {
@@ -325,8 +334,6 @@
                     switchView('dashboard', document.querySelector('.nav-item'));
                 })
                 .catch(err => {
-                    // Fallback demo lokal jika URL API belum diisi
-                    appData = { "Form 2b Konteks Strategis OPD": [["Kolom 1", "Kolom 2"], ["Data Demo 1", "Data Demo 2"]] };
                     document.getElementById('view-subtitle').innerText = "Mode Offline / Menunggu Koneksi API";
                     switchView('dashboard', document.querySelector('.nav-item'));
                 });
@@ -347,8 +354,15 @@
                 alert(res.message);
             })
             .catch(err => {
-                alert("Simpan data disimulasikan / Periksa koneksi API Apps Script.");
+                alert("Simpan data berhasil disimulasikan / Periksa koneksi Web App URL.");
             });
+        }
+
+        function getRecordCountText(sheetName) {
+            if (appData[sheetName] && appData[sheetName].length > 1) {
+                return (appData[sheetName].length - 1) + " data tersimpan";
+            }
+            return "Otomatis dari form lain";
         }
 
         function switchView(viewName, el) {
@@ -361,15 +375,116 @@
             if (viewName === 'dashboard') {
                 titleElem.innerText = "Beranda Eksekutif";
                 container.innerHTML = `
-                    <div class="welcome-hero">
-                        <h3>Kertas Kerja Manajemen Risiko Provinsi Sulawesi Tengah</h3>
-                        <p>Selamat datang di sistem informasi manajemen risiko terpadu. Pilih modul pada menu sebelah kiri untuk mengelola formulir analisis dan pemantauan risiko.</p>
+                    <div class="dashboard-hero">
+                        <h3>Alur Kertas Kerja</h3>
+                        <p>Klik salah satu tahapan untuk mulai mengisi atau meninjau data. Setiap pertanyaan pada formulir ini mengikuti persis kolom dan keterangan pada Kertas Kerja Manajemen Risiko 2026 Dinas PMD Provinsi Sulawesi Tengah.</p>
+                    </div>
+                    <div class="workflow-grid">
+                        <div class="workflow-card" onclick="switchViewNav('Form 2b Konteks Strategis OPD')">
+                            <div>
+                                <span class="card-badge">Form 2.b</span>
+                                <h4>Konteks Strategis OPD</h4>
+                                <p>Penetapan konteks risiko strategis: tujuan, sasaran, dan IKU Renstra OPD yang dinilai risikonya.</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 2b Konteks Strategis OPD')}</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Form 2c Konteks Operasional OPD')">
+                            <div>
+                                <span class="card-badge">Form 2.c</span>
+                                <h4>Konteks Operasional OPD</h4>
+                                <p>Penetapan konteks risiko operasional: program, kegiatan, sub kegiatan beserta indikator keluaran dan target.</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 2c Konteks Operasional OPD')}</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Form 3b Risk Strategis OPD')">
+                            <div>
+                                <span class="card-badge">Form 3.b</span>
+                                <h4>Identifikasi Risiko Strategis</h4>
+                                <p>Identifikasi peristiwa risiko atas tujuan/sasaran strategis OPD: sebab, sumber, dan dampaknya.</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 3b Risk Strategis OPD')}</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Form 3c Risk Operasional OP 24')">
+                            <div>
+                                <span class="card-badge">Form 3.c</span>
+                                <h4>Identifikasi Risiko Operasional</h4>
+                                <p>Identifikasi risiko pada tiap tahapan sub kegiatan (perencanaan, penganggaran, pelaksanaan, pelaporan).</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 3c Risk Operasional OP 24')}</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Form 4 KK hasil Analisis Risk')">
+                            <div>
+                                <span class="card-badge">Form 4</span>
+                                <h4>Hasil Analisis Risiko</h4>
+                                <p>Rekap skala dampak, skala kemungkinan, dan skala risiko (hasil rata-rata/modus penilaian FGD) untuk tiap risiko.</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 4 KK hasil Analisis Risk')}</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Matriks Risiko')">
+                            <div>
+                                <span class="card-badge">Form 6</span>
+                                <h4>Matriks Analisis Risiko</h4>
+                                <p>Peta posisi setiap kode risiko berdasarkan skala dampak dan kemungkinan — dihitung otomatis.</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>Otomatis dari form lain</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Form 5 Risiko Prioritas')">
+                            <div>
+                                <span class="card-badge">Form 5</span>
+                                <h4>Daftar Risiko Prioritas</h4>
+                                <p>Daftar risiko dengan skala risiko tertinggi yang menjadi prioritas penanganan.</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 5 Risiko Prioritas')}</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Form 7 Risk')">
+                            <div>
+                                <span class="card-badge">Form 7</span>
+                                <h4>Penilaian Kegiatan Pengendalian</h4>
+                                <p>Menilai pengendalian yang sudah ada, celah pengendalian, dan rencana tindak pengendalian (RTP).</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 7 Risk')}</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Form 8 Infokom')">
+                            <div>
+                                <span class="card-badge">Form 8</span>
+                                <h4>Pengkomunikasian Pengendalian</h4>
+                                <p>Rencana pengkomunikasian kegiatan pengendalian yang dibutuhkan kepada pihak terkait.</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 8 Infokom')}</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Form 9 Rencana Monitoring PI')">
+                            <div>
+                                <span class="card-badge">Form 9</span>
+                                <h4>Rencana Monitoring Pengendalian Intern</h4>
+                                <p>Rancangan pemantauan atas pengendalian intern yang dibangun: metode, penanggung jawab, waktu.</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 9 Rencana Monitoring PI')}</span></div>
+                        </div>
+                        <div class="workflow-card" onclick="switchViewNav('Form 10 Monitor Risk Even&RTP')">
+                            <div>
+                                <span class="card-badge">Form 10</span>
+                                <h4>Pencatatan Kejadian Risiko & RTP</h4>
+                                <p>Mencatat kejadian risiko (risk event) yang benar-benar terjadi pada tahun berjalan beserta realisasi RTP.</p>
+                            </div>
+                            <div class="card-footer"><span>Status</span><span>${getRecordCountText('Form 10 Monitor Risk Even&RTP')}</span></div>
+                        </div>
                     </div>
                 `;
             } else {
                 titleElem.innerText = viewName;
                 renderEditor(viewName, container);
             }
+        }
+
+        function switchViewNav(sheetName) {
+            const navItems = document.querySelectorAll('.nav-item');
+            let targetEl = null;
+            navItems.forEach(item => {
+                if (item.getAttribute('onclick').includes(sheetName)) {
+                    targetEl = item;
+                }
+            });
+            switchView(sheetName, targetEl);
         }
 
         function renderEditor(sheetName, container) {
